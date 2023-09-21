@@ -211,11 +211,56 @@ svg path {
   padding: 24px 39px 59px;
 }
 .timer__modal-time {
+  display: flex;
+  flex-direction: column;
   width: 462px;
   height: 109px;
   padding-bottom: 24px;
-  border-bottom: 1px solid #e3e1e1;
-  margin-bottom: 19px;
+}
+.timer__modal-time h4 {
+  color: #161932;
+  font-family: Kumbh Sans;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  margin-bottom: 22px;
+}
+.timer__modal-time > div {
+  display: flex;
+  gap: 20px;
+}
+.timer__modal-time > div > div > label {
+  color: #1e213f;
+  font-family: Kumbh Sans;
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0.4;
+}
+.timer__modal-input {
+  margin-top: 8px;
+  width: 140px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+  border-radius: 10px;
+  background: #EFF1FA;
+}
+.timer__modal-number {
+  width: 90px;
+  border: none;
+  pointer-events: none;
+  background-color: transparent;
+}
+.timer__modal-arrow {
+  display: flex;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.timer__modal-arrow svg {
+  box-sizing: content-box;
+  padding: 4px;
 }
 .timer__modal-btn {
   width: 140px;

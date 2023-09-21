@@ -11,7 +11,7 @@ const buttonData = {
   "long break": { minutes: "15", seconds: "00" },
 };
 const modalBlock = document.querySelector(".hidden");
-const closeButton = document.querySelector(".timer__modal-close"); 
+const closeButton = document.querySelector(".timer__modal-close");
 const showNotification = document.querySelector(".timer__notification");
 let startTime = 0;
 let timer = null;
@@ -32,12 +32,12 @@ function changeContent(targetElement) {
 //NOTE - обробник подій при натисканні на кнопку
 buttons.forEach((button) => {
   button.addEventListener("click", function (e) {
-    if (running) {  
+    if (running) {
       showNotification.style.display = "block";
       setTimeout(() => {
         showNotification.style.display = "none";
       }, 3000);
-      return 
+      return;
     }
 
     changeContent(e.target);
@@ -105,21 +105,21 @@ const finishTimer = () => {
 settingsButton.addEventListener("click", () => {
   if (running) {
     showNotification.style.display = "block";
-      setTimeout(() => {
-        showNotification.style.display = "none";
-      }, 3000);
+    setTimeout(() => {
+      showNotification.style.display = "none";
+    }, 3000);
     // pauseTimer();
-    return
+    return;
   }
   // seconds.disabled = false;
   // minutes.disabled = false;
   if (!running) {
     modalBlock.style.display = "block";
-    
+
     closeButton.addEventListener("click", () => {
       modalBlock.style.display = "none";
     });
-  } 
+  }
 });
 
 //NOTE - змінна яка контролює введення тільки цифр

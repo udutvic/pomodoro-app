@@ -283,12 +283,67 @@ svg path {
     }
 
     &-time {
+      display: flex;
+      flex-direction: column;
       width: 462px;
       height: 109px;
       padding-bottom: 24px;
-      border-bottom: 1px solid #e3e1e1;
-      margin-bottom: 19px;
+      // border-bottom: 1px solid #e3e1e1;
+      // margin-bottom: 19px;
     }
+
+    &-time h4 {
+      color: #161932;
+      font-family: Kumbh Sans;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 5px;
+      margin-bottom: 22px;
+    }
+
+    &-time > div {
+      display: flex;
+      gap: 20px;
+    }
+
+    &-time > div > div > label {
+      color: #1e213f;
+      font-family: Kumbh Sans;
+      font-size: 12px;
+      font-weight: 700;
+      opacity: 0.4;      
+    }
+
+    &-input {
+      margin-top: 8px;
+      width: 140px;
+height: 48px;
+      display: flex;
+      align-items: center;
+      
+      padding-left: 16px;
+      border-radius: 10px;
+      background: #EFF1FA;
+    }
+
+    &-number {
+      width: 90px;
+      border: none;
+      pointer-events: none;
+      background-color: transparent;
+    }
+
+    &-arrow {
+      display: flex;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+    }
+
+&-arrow svg {
+  box-sizing: content-box;
+  padding: 4px;
+}
 
     &-btn {
       width: 140px;
@@ -319,5 +374,5 @@ svg path {
     font-weight: 600;
     max-width: 400px;
     text-align: center;
-  }  
+  }
 }
