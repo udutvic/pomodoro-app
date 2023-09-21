@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;700&family=Roboto+Slab:wght@400;700&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="./css/styles.css"
+    />
+    <title>Pomodoro app</title>
+  </head>
+  <body>
+    <main class="flex">
+      <section class="timer__container">
+        <img
+          class="timer__logo"
+          src="./assets/icons/logo.svg"
+          alt="logo"
+        />
+        <nav class="timer__switch">
+          <button          class="timer__switch-btn active"
+          >
+            pomodoro
+          </button>
+          <button
+            class="timer__switch-btn"
+          >
+            short break
+          </button>
+          <button
+            class="timer__switch-btn"
+          >
+            long break
+          </button>
+        </nav>
+        <article class="timer__main">
+          <article class="timer__main-container">
+            <svg class="timer__main-progress">
+              <circle class="timer__main-circle" cx="50%" cy="50%" r="45%" fill="none"></circle>
+            </svg>
+            <div class="timer__main-clock">
+              <div class="timer__main-minutes">
+                <input type="text" value="25" disabled />
+              </div>
+              <div class="timer__main-colon">:</div>
+              <div class="timer__main-seconds">
+                <input type="text" value="00" disabled />
+              </div>
+            </div>
+            <button class="timer__main-start">Start</button>
+          </article>
+        </article>
+        <button class="timer__setting">
+          <svg class="timer__setting-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28"><path fill="#d7e0ff66" d="M26.965 17.682l-2.927-2.317c.055-.448.097-.903.097-1.365 0-.462-.042-.917-.097-1.365l2.934-2.317a.702.702 0 00.167-.896l-2.775-4.851a.683.683 0 00-.847-.301l-3.454 1.407a10.506 10.506 0 00-2.345-1.379l-.52-3.71A.716.716 0 0016.503 0h-5.55a.703.703 0 00-.687.588l-.52 3.71c-.847.357-1.63.819-2.345 1.379L3.947 4.27a.691.691 0 00-.847.301L.325 9.422a.705.705 0 00.167.896l2.927 2.317c-.055.448-.097.903-.097 1.365 0 .462.042.917.097 1.365L.492 17.682a.702.702 0 00-.167.896L3.1 23.429a.683.683 0 00.847.301L7.4 22.323a10.506 10.506 0 002.345 1.379l.52 3.71c.056.329.34.588.687.588h5.55a.703.703 0 00.687-.588l.52-3.71c.847-.357 1.631-.819 2.346-1.379l3.454 1.407c.313.119.673 0 .847-.301l2.775-4.851a.705.705 0 00-.167-.896zM13.73 18.9c-2.685 0-4.857-2.191-4.857-4.9 0-2.709 2.172-4.9 4.857-4.9 2.684 0 4.856 2.191 4.856 4.9 0 2.71-2.172 4.9-4.856 4.9z"></path></svg>
+        </button>
+        <article class="timer__modal hidden">
+          <header class="timer__modal-header">
+            <h3>Settings</h3>
+            <button class="timer__modal-close"><svg class="timer__modal-close-icon"
+              xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">           
+                <path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd" d="M13.364 2.0502L11.9497 0.635986L6.99999 5.58573L2.05025 0.635986L0.636032 2.0502L5.58578 6.99995L0.636032 11.9497L2.05025 13.3639L6.99999 8.41416L11.9497 13.3639L13.364 11.9497L8.41421 6.99995L13.364 2.0502Z" fill="#1E213F"/>              
+            </svg></button>
+          </header>
+          <article class="timer__modal-form">
+            <div class="timer__modal-time">
+              <h4>TIME (MINUTES)</h4>
+              <input type="number">
+              <input type="number">
+              <input type="number">
+            </div>
+            <div class="timer__modal-font">
+              <h4>Font</h4>
+              <button></button>
+              <button></button>
+              <button></button>            
+            </div>
+            <div class="timer__modal-color">
+              <h4>Font</h4>
+              <button></button>
+              <button></button>
+              <button></button>            
+            </div>
+          </article>
+          <button class="timer__modal-btn">Apply</button>
+        </article>
+      </section>
+    </main>
+    <script src="./js/app.js"></script>
+  </body>
+</html>

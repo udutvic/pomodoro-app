@@ -1,0 +1,306 @@
+$color-light-blue: rgba(215, 224, 255, 0.4);
+$color-light-blue-2: rgb(215, 224, 255);
+$color-dark-blue: rgb(30, 33, 63);
+$color-dark-blue-2: rgb(22, 25, 50);
+$color-white: rgb(255, 255, 255);
+$color-light-grey: rgb(239, 241, 250);
+$color-red: rgba(248, 112, 112);
+$dash-array: 1034px;
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: $color-dark-blue;
+  font-family: "Kumbh Sans", sans-serif;
+  // font-family: "Roboto Slab", serif;
+  // font-family: "Space Mono", monospace;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 100px 0;
+}
+
+button {
+  transition: all 0.3s linear;
+}
+
+circle {
+  stroke-dashoffset: calc($dash-array - ($dash-array * 100) / 100);
+}
+
+input[type="text"] {
+  border: 0;
+  border-bottom: 1px dashed white;
+  background: none;
+  color: $color-light-blue-2;
+  font-weight: 700;
+  letter-spacing: -5px;
+  font-size: 100px;
+  width: 150px;
+  text-align: center;
+  outline: none;
+}
+
+input[type="text"]:disabled {
+  border-bottom: none;
+}
+
+svg path {
+  transition: all 0.3s linear;
+}
+
+.hidden {
+   display: none;
+}
+
+.timer {
+  // .timer__container
+
+  &__container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  // .timer__logo
+
+  &__logo {
+    display: block;
+    margin-bottom: 55px;
+  }
+
+  // .timer__switch
+  &__switch {
+    display: flex;
+    width: 374px;
+    height: 64px;
+    border-radius: 31.5px;
+    background-color: $color-dark-blue-2;
+    padding: 8px 7px;
+    margin-bottom: 45px;
+    position: relative;
+
+    // .timer__switch-btn
+    &-btn {
+      cursor: pointer;
+      width: 120px;
+      height: 48px;
+      border-radius: 26.5px;
+      border: none;
+      background-color: transparent;
+      font-size: 14px;
+      font-weight: 700;
+      color: $color-light-blue;
+    }
+
+    &-btn:hover {
+      color: $color-light-blue-2;
+    }
+
+    &-btn.active {
+      background-color: $color-red;
+      color: $color-dark-blue;
+    }
+  }
+
+  // .timer__main
+  &__main {
+    width: 410px;
+    height: 410px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(315deg, #2e325a 0%, #0e112a 100%);
+    box-shadow: 50px 50px 100px 0px #121530, -50px -50px 100px 0px #272c5a;
+    margin-bottom: 63px;
+
+    // .timer__main-container
+    &-container {
+      align-items: center;
+      background-color: $color-dark-blue-2;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      height: 366px;
+      justify-content: center;
+      position: relative;
+      width: 366px;
+    }
+
+    // .timer__main-progress
+    &-progress {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+    }
+
+    // .timer__main-circle
+    &-circle {
+      stroke: $color-red;
+      stroke-width: 10;
+      stroke-linecap: round;
+      stroke-dasharray: $dash-array;
+      transform: rotate(-90deg);
+      transform-origin: center center;
+      transition: stroke-dashoffset 1s linear, stroke 0.8s linear;
+    }
+
+    // .timer__main-clock
+
+    &-clock {
+      display: flex;
+      font-size: 100px;
+      margin: 30px auto;
+      position: relative;
+      // top: 30px;
+    }
+
+    // .timer__main-minutes
+
+    &-minutes {
+    }
+
+    // .timer__main-colon
+
+    &-colon {
+      margin-top: -10px;
+      font-weight: 700;
+      color: $color-light-blue-2;
+    }
+
+    // .timer__main-seconds
+
+    &-seconds {
+    }
+
+    // .timer__main-time
+    &-time {
+    }
+
+    // .timer__main-start
+    &-start {
+      position: relative;
+      background-color: transparent;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      text-transform: uppercase;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 15px;
+      color: $color-light-blue-2;
+      padding-left: 24px;
+    }
+
+    &-start:hover {
+      color: $color-red;
+    }
+  }
+
+  // .timer__setting
+  &__setting {
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+    outline: none;
+
+    // .timer__setting-icon
+    &-icon {
+      box-sizing: content-box;
+    }
+
+    // .timer__setting-icon:hover
+    &-icon:hover path {
+      fill: $color-light-blue-2;
+    }
+
+    &-icon:hover {
+      animation: rotate 3s linear infinite;
+    }
+
+    @keyframes rotate {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+
+  // .timer__modal
+  &__modal {
+    width: 540px;
+    height: 464px;
+    border-radius: 25px;
+    background: #fff;
+    position: absolute;
+    top: 206px;
+
+    // .timer__modal-header
+    &-header {
+      align-items: center;
+      border-bottom: 1px solid #e3e1e1;
+      display: flex;
+      justify-content: space-between;
+      padding: 34px 39px;
+
+      h3 {
+        color: $color-dark-blue-2;
+        font-family: Kumbh Sans;
+        font-size: 28px;
+        font-weight: 700;
+      }
+    }
+
+    &-close {
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+    }
+
+    &-close-icon {
+      box-sizing: content-box;
+    }
+
+    &-close-icon:hover path {
+      fill: $color-dark-blue;
+      opacity: 1;
+    }
+
+    &-form {
+      padding: 24px 39px 59px;
+    }
+
+    &-time {
+      width: 462px;
+      height: 109px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid #e3e1e1;
+      margin-bottom: 19px;
+    }
+
+    &-btn {
+      width: 140px;
+      height: 53px;
+      border-radius: 26.5px;
+      background: $color-red;
+      border: none;
+      text-align: center;
+      font-family: Kumbh Sans;
+      font-size: 16px;
+      font-weight: 700;
+      color: $color-white;
+      cursor: pointer;
+      position: relative;
+      left: 50%;
+      margin-left: -70px;
+    }
+  }
+}
