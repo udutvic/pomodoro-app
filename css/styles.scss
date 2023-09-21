@@ -33,6 +33,10 @@ button {
   transition: all 0.3s linear;
 }
 
+.ring.ending {
+  stroke: #900A0A;
+}
+
 circle {
   stroke-dashoffset: calc($dash-array - ($dash-array * 100) / 100);
 }
