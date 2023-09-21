@@ -23,7 +23,7 @@ button {
 }
 
 .ring.ending {
-  stroke: #900A0A;
+  stroke: #900a0a;
 }
 
 circle {
@@ -232,4 +232,16 @@ svg path {
   position: relative;
   left: 50%;
   margin-left: -70px;
+}
+.timer__notification {
+  display: none;
+  background-color: rgb(255, 255, 255);
+  border-radius: 40px;
+  padding: 24px;
+  position: fixed;
+  bottom: 80px;
+  font-size: 24px;
+  font-weight: 600;
+  max-width: 400px;
+  text-align: center;
 }/*# sourceMappingURL=styles.css.map */

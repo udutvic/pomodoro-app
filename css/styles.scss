@@ -34,7 +34,7 @@ button {
 }
 
 .ring.ending {
-  stroke: #900A0A;
+  stroke: #900a0a;
 }
 
 circle {
@@ -63,7 +63,7 @@ svg path {
 }
 
 .hidden {
-   display: none;
+  display: none;
 }
 
 .timer {
@@ -307,4 +307,18 @@ svg path {
       margin-left: -70px;
     }
   }
+
+  &__notification {
+    display: none;
+    background-color: $color-white;
+    border-radius: 40px;
+    padding: 24px;
+    position: fixed;
+    bottom: 80px;
+    font-size: 24px;
+    font-weight: 600;
+    max-width: 400px;
+    text-align: center;
+  }
+  
 }

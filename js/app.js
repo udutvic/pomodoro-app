@@ -1,5 +1,4 @@
 //NOTE - оголошення змінних
-
 const buttons = document.querySelectorAll(".timer__switch-btn");
 const settingsButton = document.querySelector(".timer__setting");
 const startButton = document.querySelector(".timer__main-start");
@@ -11,6 +10,7 @@ const buttonData = {
   "short break": { minutes: "05", seconds: "00" },
   "long break": { minutes: "15", seconds: "00" },
 };
+const showNotification = document.querySelector(".timer__notification");
 let startTime = 0;
 let timer = null;
 let running = false;
@@ -30,10 +30,14 @@ function changeContent(targetElement) {
 //NOTE - обробник подій при натисканні на кнопку
 buttons.forEach((button) => {
   button.addEventListener("click", function (e) {
-    if (running) {
-      return;
+    if (running) {  
+      showNotification.style.display = "block";
+      setTimeout(() => {
+        showNotification.style.display = "none";
+      }, 3000);
+      return 
     }
-    
+
     changeContent(e.target);
     const buttonText = e.target.textContent.trim();
 
