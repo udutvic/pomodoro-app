@@ -213,9 +213,9 @@ svg path {
 .timer__modal-time {
   display: flex;
   flex-direction: column;
-  width: 462px;
-  height: 109px;
   padding-bottom: 24px;
+  border-bottom: 1px solid #e3e1e1;
+  margin-bottom: 19px;
 }
 .timer__modal-time h4 {
   color: #161932;
@@ -261,6 +261,10 @@ svg path {
 .timer__modal-arrow svg {
   box-sizing: content-box;
   padding: 4px;
+}
+.timer__modal-arrow svg:hover path {
+  stroke: rgb(30, 33, 63);
+  stroke-opacity: 1;
 }
 .timer__modal-btn {
   width: 140px;
