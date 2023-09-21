@@ -4,7 +4,9 @@ const settingsButton = document.querySelector(".timer__setting");
 const startButton = document.querySelector(".timer__main-start");
 const seconds = document.querySelector(".timer__main-seconds > input[type=text]");
 const minutes = document.querySelector(".timer__main-minutes > input[type=text]");
-minutes.value = "25";
+
+var value = Number("25");
+minutes.value = value;
 const ring = document.querySelector(".ring");
 const buttonData = {
   pomodoro: { minutes: "25", seconds: "00" },
