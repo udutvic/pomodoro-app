@@ -251,6 +251,10 @@ svg path {
   border: none;
   pointer-events: none;
   background-color: transparent;
+  color: #1E213F;
+  font-family: Kumbh Sans;
+  font-size: 14px;
+  font-weight: 700;
 }
 .timer__modal-arrow {
   display: flex;

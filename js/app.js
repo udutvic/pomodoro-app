@@ -10,9 +10,19 @@ const buttonData = {
   "short break": { minutes: "05", seconds: "00" },
   "long break": { minutes: "15", seconds: "00" },
 };
+const pomodoroInput = document.querySelector(".pomodoro");
+const incrementButton = document.querySelector(".pomo .timer__modal-arrow.up");
+const decrementButton = document.querySelector(".pomo .timer__modal-arrow.down");
+const shortInput = document.querySelector(".short-break");
+const incrementButtonShort = document.querySelector(".short .timer__modal-arrow.up");
+const decrementButtonShort = document.querySelector(".short .timer__modal-arrow.down");
+const longInput = document.querySelector(".long-break");
+const incrementButtonLong = document.querySelector(".long .timer__modal-arrow.up");
+const decrementButtonLong = document.querySelector(".long .timer__modal-arrow.down");
 const modalBlock = document.querySelector(".hidden");
 const closeButton = document.querySelector(".timer__modal-close");
 const showNotification = document.querySelector(".timer__notification");
+const applyButton = document.querySelector(".timer__modal-btn");
 let startTime = 0;
 let timer = null;
 let running = false;
@@ -121,6 +131,73 @@ settingsButton.addEventListener("click", () => {
     });
   }
 });
+
+applyButton.addEventListener("click", () => {
+  buttonData["pomodoro"].minutes = pomodoroInput.value;
+  console.log(buttonData);
+  return
+});
+
+// Збільшення значення інпута на 1 з додаванням нуля та обмеженням до 60
+incrementButton.addEventListener("click", () => {
+  let currentValue = parseInt(pomodoroInput.value);
+  if (currentValue < 60) {
+      currentValue = (currentValue + 1).toString().padStart(2, '0');
+      pomodoroInput.value = currentValue;
+      buttonData["pomodoro"].minutes = currentValue;
+  }
+});
+
+// Зменшення значення інпута на 1 з додаванням нуля та обмеженням до 0
+decrementButton.addEventListener("click", () => {
+  let currentValue = parseInt(pomodoroInput.value);
+  if (currentValue > 0) {
+      currentValue = (currentValue - 1).toString().padStart(2, '0');
+      pomodoroInput.value = currentValue;
+      buttonData["pomodoro"].minutes = currentValue;
+  }
+});
+
+// Збільшення значення інпута на 1 з додаванням нуля та обмеженням до 60
+incrementButtonShort.addEventListener("click", () => {
+  let currentValue = parseInt(shortInput.value);
+  if (currentValue < 60) {
+      currentValue = (currentValue + 1).toString().padStart(2, '0');
+      shortInput.value = currentValue;
+      buttonData["short break"].minutes = currentValue;
+  }
+});
+
+// Зменшення значення інпута на 1 з додаванням нуля та обмеженням до 0
+decrementButtonShort.addEventListener("click", () => {
+  let currentValue = parseInt(shortInput.value);
+  if (currentValue > 0) {
+      currentValue = (currentValue - 1).toString().padStart(2, '0');
+      shortInput.value = currentValue;
+      buttonData["short break"].minutes = currentValue;
+  }
+});
+
+// Збільшення значення інпута на 1 з додаванням нуля та обмеженням до 60
+incrementButtonLong.addEventListener("click", () => {
+  let currentValue = parseInt(longInput.value);
+  if (currentValue < 60) {
+      currentValue = (currentValue + 1).toString().padStart(2, '0');
+      longInput.value = currentValue;
+      buttonData["long break"].minutes = currentValue;
+  }
+});
+
+// Зменшення значення інпута на 1 з додаванням нуля та обмеженням до 0
+decrementButtonLong.addEventListener("click", () => {
+  let currentValue = parseInt(longInput.value);
+  if (currentValue > 0) {
+      currentValue = (currentValue - 1).toString().padStart(2, '0');
+      longInput.value = currentValue;
+      buttonData["long break"].minutes = currentValue;
+  }
+});
+
 
 //NOTE - змінна яка контролює введення тільки цифр
 const validateTimeInput = (e) => {
