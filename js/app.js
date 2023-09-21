@@ -8,11 +8,7 @@ const minutes = document.querySelector(".timer__main-minutes > input[type=text]"
 var value = Number("25");
 minutes.value = value;
 const ring = document.querySelector(".ring");
-const buttonData = {
-  pomodoro: { minutes: "25", seconds: "00" },
-  "short break": { minutes: "05", seconds: "00" },
-  "long break": { minutes: "15", seconds: "00" },
-};
+const buttonData = { pomodoro: { minutes: Number("25"), seconds: "00" }, "short break": { minutes: Number("05"), seconds: "00" }, "long break": { minutes: Number("15"), seconds: "00" } };
 const pomodoroInput = document.querySelector(".pomodoro");
 const incrementButton = document.querySelector(".pomo .timer__modal-arrow.up");
 const decrementButton = document.querySelector(".pomo .timer__modal-arrow.down");
