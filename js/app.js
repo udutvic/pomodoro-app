@@ -102,7 +102,12 @@ const finishTimer = () => {
 //NOTE - Обробник подій для кнопки налаштування
 settingsButton.addEventListener("click", () => {
   if (running) {
-    pauseTimer();
+    showNotification.style.display = "block";
+      setTimeout(() => {
+        showNotification.style.display = "none";
+      }, 3000);
+    // pauseTimer();
+    return
   }
   seconds.disabled = false;
   minutes.disabled = false;
