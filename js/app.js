@@ -39,6 +39,9 @@ buttons.forEach((button) => {
       minutes.value = data.minutes;
       seconds.value = data.seconds;
     }
+    if(running){
+      pauseTimer();
+  }
   });
 });
 
