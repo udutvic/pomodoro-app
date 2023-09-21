@@ -10,6 +10,8 @@ const buttonData = {
   "short break": { minutes: "05", seconds: "00" },
   "long break": { minutes: "15", seconds: "00" },
 };
+const modalBlock = document.querySelector(".hidden");
+const closeButton = document.querySelector(".timer__modal-close"); 
 const showNotification = document.querySelector(".timer__notification");
 let startTime = 0;
 let timer = null;
@@ -109,8 +111,15 @@ settingsButton.addEventListener("click", () => {
     // pauseTimer();
     return
   }
-  seconds.disabled = false;
-  minutes.disabled = false;
+  // seconds.disabled = false;
+  // minutes.disabled = false;
+  if (!running) {
+    modalBlock.style.display = "block";
+    
+    closeButton.addEventListener("click", () => {
+      modalBlock.style.display = "none";
+    });
+  } 
 });
 
 //NOTE - змінна яка контролює введення тільки цифр
