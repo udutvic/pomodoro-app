@@ -5,7 +5,7 @@ const startButton = document.querySelector(".timer__main-start");
 const seconds = document.querySelector(".timer__main-seconds > input[type=text]");
 const minutes = document.querySelector(".timer__main-minutes > input[type=text]");
 
-var value = Number("25");
+const value = Number("25");
 minutes.value = value;
 const ring = document.querySelector(".ring");
 const buttonData = { pomodoro: { minutes: "25", seconds: "00" }, "short break": { minutes: "05", seconds: "00" }, "long break": { minutes: "15", seconds: "00" } };
