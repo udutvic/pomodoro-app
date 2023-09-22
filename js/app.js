@@ -140,13 +140,10 @@ settingsButton.addEventListener("click", () => {
 
 applyButton.addEventListener("click", () => {
   
-    buttonData["pomodoro"].minutes = pomodoroInput.value.toString();
+    buttonData["pomodoro"].minutes = pomodoroInput.value.toString();    
     
-    // Виводимо оновлений об'єкт "buttonData" в консоль
-    console.log(buttonData);
-    
-    // Ховаємо модальне вікно
-    // modalBlock.style.display = "none";
+   
+    modalBlock.style.display = "none";
   
 });
 
