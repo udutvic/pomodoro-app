@@ -2,23 +2,26 @@
 const buttons = document.querySelectorAll(".timer__switch-btn");
 const settingsButton = document.querySelector(".timer__setting");
 const startButton = document.querySelector(".timer__main-start");
-const seconds = document.querySelector(".timer__main-seconds > input[type=text]");
-const minutes = document.querySelector(".timer__main-minutes > input[type=text]");
+let seconds = document.querySelector(".timer__main-seconds > input[type=number]");
+let minutes = document.querySelector(".timer__main-minutes > input[type=number]");
 const ring = document.querySelector(".ring");
-const buttonData = {
+let buttonData = {
   pomodoro: { minutes: "25", seconds: "00" },
   "short break": { minutes: "05", seconds: "00" },
   "long break": { minutes: "15", seconds: "00" },
 };
 minutes.value = buttonData["pomodoro"].minutes;
 seconds.value = buttonData["pomodoro"].seconds;
-const pomodoroInput = document.querySelector(".pomodoro");
+let pomodoroInput = document.querySelector(".pomodoro");
+pomodoroInput.value = buttonData["pomodoro"].minutes;
 const incrementButton = document.querySelector(".pomo .timer__modal-arrow.up");
 const decrementButton = document.querySelector(".pomo .timer__modal-arrow.down");
-const shortInput = document.querySelector(".short-break");
+let shortInput = document.querySelector(".short-break");
+shortInput.value = buttonData["short break"].minutes;
 const incrementButtonShort = document.querySelector(".short .timer__modal-arrow.up");
 const decrementButtonShort = document.querySelector(".short .timer__modal-arrow.down");
-const longInput = document.querySelector(".long-break");
+let longInput = document.querySelector(".long-break");
+longInput.value = buttonData["long break"].minutes;
 const incrementButtonLong = document.querySelector(".long .timer__modal-arrow.up");
 const decrementButtonLong = document.querySelector(".long .timer__modal-arrow.down");
 const modalBlock = document.querySelector(".hidden");
@@ -32,15 +35,13 @@ let originalMinutes = 0;
 let originalSeconds = 0;
 let totalSeconds;
 
-console.log(buttonData);
-
 //NOTE - функція для активації кнопок
-function changeContent(targetElement) {
+function changeContent(target) {
   const buttons = document.querySelectorAll(".timer__switch-btn");
   buttons.forEach((button) => {
     button.classList.remove("active");
   });
-  targetElement.classList.add("active");
+  target.classList.add("active");
 }
 
 //NOTE - обробник подій при натисканні на кнопку
@@ -55,15 +56,14 @@ buttons.forEach((button) => {
     }
 
     changeContent(e.target);
-    const buttonText = e.target.textContent.trim();
+    let buttonText = e.target.textContent.trim();
     // console.log(buttonText);
 
-    const data = buttonData[buttonText];
+    let data = buttonData[buttonText];
     if (data) {
       minutes.value = data.minutes;
       seconds.value = data.seconds;
     }
-    // console.log(data);
   });
 });
 
@@ -138,31 +138,47 @@ settingsButton.addEventListener("click", () => {
   }
 });
 
+function updatePomodoroTimer() {
+  const activeButton = document.querySelector(".timer__switch-btn.active");
 
-applyButton.addEventListener("click", () => {  
-    buttonData["pomodoro"].minutes = pomodoroInput.value.toString();    
-    buttonData["short break"].minutes = shortInput.value.toString();    
-    buttonData["long break"].minutes = longInput.value.toString();    
-   
-    modalBlock.style.display = "none";  
+  if (!activeButton) {
+    return;
+  }
+
+  const buttonText = activeButton.textContent.trim();
+
+  const data = buttonData[buttonText];
+
+  if (data) {
+    minutes.value = data.minutes;
+    seconds.value = data.seconds;
+  }
+}
+
+applyButton.addEventListener("click", () => {
+  buttonData["pomodoro"].minutes = pomodoroInput.value.toString();
+  buttonData["short break"].minutes = shortInput.value.toString();
+  buttonData["long break"].minutes = longInput.value.toString();
+
+  updatePomodoroTimer();
+  modalBlock.style.display = "none";
 });
 
 // Збільшення значення інпута на 1 з додаванням нуля та обмеженням до 60
 incrementButton.addEventListener("click", () => {
   let currentValue = parseInt(pomodoroInput.value);
   if (currentValue < 60) {
-    currentValue = (currentValue + 1).toString().padStart(2, '0');      
-    pomodoroInput.value = currentValue;    
+    currentValue = (currentValue + 1).toString().padStart(2, "0");
+    pomodoroInput.value = currentValue;
   }
 });
-
 
 // Зменшення значення інпута на 1 з додаванням нуля та обмеженням до 0
 decrementButton.addEventListener("click", () => {
   let currentValue = parseInt(pomodoroInput.value);
   if (currentValue > 0) {
-    currentValue = (currentValue - 1).toString().padStart(2, '0');      
-    pomodoroInput.value = currentValue;   
+    currentValue = (currentValue - 1).toString().padStart(2, "0");
+    pomodoroInput.value = currentValue;
   }
 });
 
@@ -170,8 +186,8 @@ decrementButton.addEventListener("click", () => {
 incrementButtonShort.addEventListener("click", () => {
   let currentValue = parseInt(shortInput.value);
   if (currentValue < 60) {
-      currentValue = (currentValue + 1).toString().padStart(2, '0');
-      shortInput.value = currentValue;     
+    currentValue = (currentValue + 1).toString().padStart(2, "0");
+    shortInput.value = currentValue;
   }
 });
 
@@ -179,8 +195,8 @@ incrementButtonShort.addEventListener("click", () => {
 decrementButtonShort.addEventListener("click", () => {
   let currentValue = parseInt(shortInput.value);
   if (currentValue > 0) {
-      currentValue = (currentValue - 1).toString().padStart(2, '0');
-      shortInput.value = currentValue;     
+    currentValue = (currentValue - 1).toString().padStart(2, "0");
+    shortInput.value = currentValue;
   }
 });
 
@@ -188,8 +204,8 @@ decrementButtonShort.addEventListener("click", () => {
 incrementButtonLong.addEventListener("click", () => {
   let currentValue = parseInt(longInput.value);
   if (currentValue < 60) {
-      currentValue = (currentValue + 1).toString().padStart(2, '0');
-      longInput.value = currentValue;
+    currentValue = (currentValue + 1).toString().padStart(2, "0");
+    longInput.value = currentValue;
   }
 });
 
@@ -197,20 +213,45 @@ incrementButtonLong.addEventListener("click", () => {
 decrementButtonLong.addEventListener("click", () => {
   let currentValue = parseInt(longInput.value);
   if (currentValue > 0) {
-      currentValue = (currentValue - 1).toString().padStart(2, '0');
-      longInput.value = currentValue;     
+    currentValue = (currentValue - 1).toString().padStart(2, "0");
+    longInput.value = currentValue;
   }
 });
 
+// function increaseInputValue(longInput, incrementButtonLong) {
+//   incrementButtonLong.addEventListener('click', () => {
+//     let currentValue = parseInt(longInput.value);
+//     if (currentValue < 60) {
+//       currentValue = (currentValue + 1).toString().padStart(2, '0');
+//       longInput.value = currentValue;
+//       }
+//       return;
+//   });
+// }
 
-// //NOTE - змінна яка контролює введення тільки цифр
-// const validateTimeInput = (e) => {
-//   const validatedInput = e.target.value.replace(/[^0-9]/g, "").substring(0, 2);
-//   e.target.value = validatedInput;
-// };
+// increaseInputValue(longInput, incrementButtonLong);
 
-// minutes.addEventListener("keyup", validateTimeInput);
-// seconds.addEventListener("keyup", validateTimeInput);
+// function decreaseInputValue(longInput, decrementButtonLong) {
+//   decrementButtonLong.addEventListener('click', () => {
+//     let currentValue = parseInt(longInput.value);
+//     if (currentValue > 0) {
+//       currentValue = (currentValue - 1).toString().padStart(2, '0');
+//       longInput.value = currentValue;
+//       }
+//       return;
+//   });
+// }
+
+// decreaseInputValue(longInput, decrementButtonLong);
+
+//NOTE - змінна яка контролює введення тільки цифр
+const validateTimeInput = (e) => {
+  const validatedInput = e.target.value.replace(/[^0-9]/g, "").substring(0, 2);
+  e.target.value = validatedInput;
+};
+
+minutes.addEventListener("keyup", validateTimeInput);
+seconds.addEventListener("keyup", validateTimeInput);
 
 //NOTE - скидання таймера
 const resetTimer = () => {

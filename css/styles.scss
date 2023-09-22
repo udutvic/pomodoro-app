@@ -41,10 +41,10 @@ circle {
   stroke-dashoffset: calc($dash-array - ($dash-array * 100) / 100);
 }
 
-input[type="text"] {
-  border: 0;
-  border-bottom: 1px dashed white;
-  background: none;
+.timer__main-minutes > input[type="number"],.timer__main-seconds > input[type="number"] {  
+  border: none;
+  // border-bottom: 1px dashed white;
+  background: inherit;
   color: $color-light-blue-2;
   font-weight: 700;
   letter-spacing: -5px;
@@ -52,11 +52,9 @@ input[type="text"] {
   width: 150px;
   text-align: center;
   outline: none;
+  pointer-events: none;
 }
 
-input[type="text"]:disabled {
-  border-bottom: none;
-}
 
 svg path {
   transition: all 0.3s linear;
