@@ -4,11 +4,14 @@ const settingsButton = document.querySelector(".timer__setting");
 const startButton = document.querySelector(".timer__main-start");
 const seconds = document.querySelector(".timer__main-seconds > input[type=text]");
 const minutes = document.querySelector(".timer__main-minutes > input[type=text]");
-
-const value = Number("25");
-minutes.value = value;
 const ring = document.querySelector(".ring");
-const buttonData = { pomodoro: { minutes: "25", seconds: "00" }, "short break": { minutes: "05", seconds: "00" }, "long break": { minutes: "15", seconds: "00" } };
+const buttonData = {
+  pomodoro: { minutes: "25", seconds: "00" },
+  "short break": { minutes: "05", seconds: "00" },
+  "long break": { minutes: "15", seconds: "00" },
+};
+minutes.value = buttonData["pomodoro"].minutes;
+seconds.value = buttonData["pomodoro"].seconds;
 const pomodoroInput = document.querySelector(".pomodoro");
 const incrementButton = document.querySelector(".pomo .timer__modal-arrow.up");
 const decrementButton = document.querySelector(".pomo .timer__modal-arrow.down");
@@ -28,6 +31,8 @@ let running = false;
 let originalMinutes = 0;
 let originalSeconds = 0;
 let totalSeconds;
+
+console.log(buttonData);
 
 //NOTE - функція для активації кнопок
 function changeContent(targetElement) {
@@ -51,12 +56,14 @@ buttons.forEach((button) => {
 
     changeContent(e.target);
     const buttonText = e.target.textContent.trim();
+    // console.log(buttonText);
 
     const data = buttonData[buttonText];
     if (data) {
       minutes.value = data.minutes;
       seconds.value = data.seconds;
     }
+    // console.log(data);
   });
 });
 
@@ -132,28 +139,34 @@ settingsButton.addEventListener("click", () => {
 });
 
 applyButton.addEventListener("click", () => {
-  buttonData["pomodoro"].minutes = pomodoroInput.value;
-  console.log(buttonData);
-  return
+  
+    buttonData["pomodoro"].minutes = pomodoroInput.value.toString();
+    
+    // Виводимо оновлений об'єкт "buttonData" в консоль
+    console.log(buttonData);
+    
+    // Ховаємо модальне вікно
+    // modalBlock.style.display = "none";
+  
 });
 
 // Збільшення значення інпута на 1 з додаванням нуля та обмеженням до 60
 incrementButton.addEventListener("click", () => {
   let currentValue = parseInt(pomodoroInput.value);
   if (currentValue < 60) {
-      currentValue = (currentValue + 1).toString().padStart(2, '0');
-      pomodoroInput.value = currentValue;
-      buttonData["pomodoro"].minutes = currentValue;
+    currentValue = (currentValue + 1).toString().padStart(2, '0');      
+    pomodoroInput.value = currentValue;    
   }
 });
+
 
 // Зменшення значення інпута на 1 з додаванням нуля та обмеженням до 0
 decrementButton.addEventListener("click", () => {
   let currentValue = parseInt(pomodoroInput.value);
   if (currentValue > 0) {
-      currentValue = (currentValue - 1).toString().padStart(2, '0');
-      pomodoroInput.value = currentValue;
-      buttonData["pomodoro"].minutes = currentValue;
+    currentValue = (currentValue - 1).toString().padStart(2, '0');      
+    pomodoroInput.value = currentValue;
+      // buttonData["pomodoro"].minutes = currentValue;
   }
 });
 
@@ -198,14 +211,14 @@ decrementButtonLong.addEventListener("click", () => {
 });
 
 
-//NOTE - змінна яка контролює введення тільки цифр
-const validateTimeInput = (e) => {
-  const validatedInput = e.target.value.replace(/[^0-9]/g, "").substring(0, 2);
-  e.target.value = validatedInput;
-};
+// //NOTE - змінна яка контролює введення тільки цифр
+// const validateTimeInput = (e) => {
+//   const validatedInput = e.target.value.replace(/[^0-9]/g, "").substring(0, 2);
+//   e.target.value = validatedInput;
+// };
 
-minutes.addEventListener("keyup", validateTimeInput);
-seconds.addEventListener("keyup", validateTimeInput);
+// minutes.addEventListener("keyup", validateTimeInput);
+// seconds.addEventListener("keyup", validateTimeInput);
 
 //NOTE - скидання таймера
 const resetTimer = () => {
