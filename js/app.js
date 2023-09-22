@@ -138,13 +138,13 @@ settingsButton.addEventListener("click", () => {
   }
 });
 
-applyButton.addEventListener("click", () => {
-  
+
+applyButton.addEventListener("click", () => {  
     buttonData["pomodoro"].minutes = pomodoroInput.value.toString();    
-    
+    buttonData["short break"].minutes = shortInput.value.toString();    
+    buttonData["long break"].minutes = longInput.value.toString();    
    
-    modalBlock.style.display = "none";
-  
+    modalBlock.style.display = "none";  
 });
 
 // Збільшення значення інпута на 1 з додаванням нуля та обмеженням до 60
@@ -162,8 +162,7 @@ decrementButton.addEventListener("click", () => {
   let currentValue = parseInt(pomodoroInput.value);
   if (currentValue > 0) {
     currentValue = (currentValue - 1).toString().padStart(2, '0');      
-    pomodoroInput.value = currentValue;
-      // buttonData["pomodoro"].minutes = currentValue;
+    pomodoroInput.value = currentValue;   
   }
 });
 
@@ -172,8 +171,7 @@ incrementButtonShort.addEventListener("click", () => {
   let currentValue = parseInt(shortInput.value);
   if (currentValue < 60) {
       currentValue = (currentValue + 1).toString().padStart(2, '0');
-      shortInput.value = currentValue;
-      buttonData["short break"].minutes = currentValue;
+      shortInput.value = currentValue;     
   }
 });
 
@@ -182,8 +180,7 @@ decrementButtonShort.addEventListener("click", () => {
   let currentValue = parseInt(shortInput.value);
   if (currentValue > 0) {
       currentValue = (currentValue - 1).toString().padStart(2, '0');
-      shortInput.value = currentValue;
-      buttonData["short break"].minutes = currentValue;
+      shortInput.value = currentValue;     
   }
 });
 
@@ -193,7 +190,6 @@ incrementButtonLong.addEventListener("click", () => {
   if (currentValue < 60) {
       currentValue = (currentValue + 1).toString().padStart(2, '0');
       longInput.value = currentValue;
-      buttonData["long break"].minutes = currentValue;
   }
 });
 
@@ -202,8 +198,7 @@ decrementButtonLong.addEventListener("click", () => {
   let currentValue = parseInt(longInput.value);
   if (currentValue > 0) {
       currentValue = (currentValue - 1).toString().padStart(2, '0');
-      longInput.value = currentValue;
-      buttonData["long break"].minutes = currentValue;
+      longInput.value = currentValue;     
   }
 });
 
