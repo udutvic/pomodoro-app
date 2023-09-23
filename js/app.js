@@ -31,25 +31,20 @@ const applyButton = document.querySelector(".timer__modal-btn");
 let startTime = 0;
 let timer = null;
 let running = false;
-let originalMinutes = 0;
-let originalSeconds = 0;
 let totalSeconds;
 
-// Функція для активації кнопок 
-function changeContent(target) { 
-  // Оновлення кнопок
+//NOTE - Функція для активації кнопок
+function changeContent(target) {
   const buttons = document.querySelectorAll(".timer__switch-btn");
   buttons.forEach((button) => {
     button.classList.remove("active");
   });
-  target.classList.add("active");  
-  
+  target.classList.add("active");
 }
 
-// Обробник подій при натисканні на кнопку
+//NOTE - Обробник подій при натисканні на кнопки
 buttons.forEach((button) => {
   button.addEventListener("click", function (e) {
-    // Якщо таймер запущено, відображаємо повідомлення і повертаємося
     if (running) {
       showNotification.style.display = "block";
       setTimeout(() => {
@@ -77,7 +72,7 @@ startButton.addEventListener("click", () => {
   }
 });
 
-//NOTE - старт таймера
+//NOTE - Функція старту таймера
 const startTimer = () => {
   running = true;
   startButton.innerText = "Pause";
@@ -99,14 +94,14 @@ const startTimer = () => {
   }, 1000);
 };
 
-//NOTE - пауза таймера
+//NOTE - Функція паузи таймера
 const pauseTimer = () => {
   running = false;
   startButton.innerText = "Start";
   clearInterval(timer);
 };
 
-//NOTE - фініш таймера
+//NOTE - Функція фініша таймера
 const finishTimer = () => {
   clearInterval(timer);
   ring.classList.add("ending");
@@ -128,7 +123,7 @@ settingsButton.addEventListener("click", () => {
     // pauseTimer();
     return;
   }
-  
+
   if (!running) {
     modalBlock.style.display = "block";
 
@@ -138,12 +133,13 @@ settingsButton.addEventListener("click", () => {
   }
 });
 
+//NOTE - Функція оновлення таймера при виборі хвилин
 function updatePomodoroTimer() {
   const activeButton = document.querySelector(".timer__switch-btn.active");
 
   if (!activeButton) {
     return;
-  }  
+  }
 
   const data = buttonData[activeButton.textContent.trim()];
 
@@ -153,6 +149,7 @@ function updatePomodoroTimer() {
   }
 }
 
+//NOTE - Кнопка підвердження і закриття модального вікна
 applyButton.addEventListener("click", () => {
   buttonData["pomodoro"].minutes = pomodoroInput.value.toString();
   buttonData["short break"].minutes = shortInput.value.toString();
@@ -162,105 +159,47 @@ applyButton.addEventListener("click", () => {
   modalBlock.style.display = "none";
 });
 
-// Збільшення значення інпута на 1 з додаванням нуля та обмеженням до 60
-incrementButton.addEventListener("click", () => {
-  let currentValue = parseInt(pomodoroInput.value);
-  if (currentValue < 60) {
-    currentValue = (currentValue + 1).toString().padStart(2, "0");
-    pomodoroInput.value = currentValue;
-  }
-});
+//NOTE - Функція, яка збільшує значення
+function increaseInputValue(input, incrementButton) {
+  incrementButton.addEventListener("click", () => {
+    let currentValue = parseInt(input.value);
+    if (currentValue < 60) {
+      currentValue = (currentValue + 1).toString().padStart(2, "0");
+      input.value = currentValue;
+    }
+    return;
+  });
+}
 
-// Зменшення значення інпута на 1 з додаванням нуля та обмеженням до 0
-decrementButton.addEventListener("click", () => {
-  let currentValue = parseInt(pomodoroInput.value);
-  if (currentValue > 0) {
-    currentValue = (currentValue - 1).toString().padStart(2, "0");
-    pomodoroInput.value = currentValue;
-  }
-});
+increaseInputValue(pomodoroInput, incrementButton);
+increaseInputValue(shortInput, incrementButtonShort);
+increaseInputValue(longInput, incrementButtonLong);
 
-// Збільшення значення інпута на 1 з додаванням нуля та обмеженням до 60
-incrementButtonShort.addEventListener("click", () => {
-  let currentValue = parseInt(shortInput.value);
-  if (currentValue < 60) {
-    currentValue = (currentValue + 1).toString().padStart(2, "0");
-    shortInput.value = currentValue;
-  }
-});
+//NOTE - Функція, яка зменшує значення
+function decreaseInputValue(input, decrementButton) {
+  decrementButton.addEventListener("click", () => {
+    let currentValue = parseInt(input.value);
+    if (currentValue > 0) {
+      currentValue = (currentValue - 1).toString().padStart(2, "0");
+      input.value = currentValue;
+    }
+    return;
+  });
+}
 
-// Зменшення значення інпута на 1 з додаванням нуля та обмеженням до 0
-decrementButtonShort.addEventListener("click", () => {
-  let currentValue = parseInt(shortInput.value);
-  if (currentValue > 0) {
-    currentValue = (currentValue - 1).toString().padStart(2, "0");
-    shortInput.value = currentValue;
-  }
-});
+decreaseInputValue(pomodoroInput, decrementButton);
+decreaseInputValue(shortInput, decrementButtonShort);
+decreaseInputValue(longInput, decrementButtonLong);
 
-// Збільшення значення інпута на 1 з додаванням нуля та обмеженням до 60
-incrementButtonLong.addEventListener("click", () => {
-  let currentValue = parseInt(longInput.value);
-  if (currentValue < 60) {
-    currentValue = (currentValue + 1).toString().padStart(2, "0");
-    longInput.value = currentValue;
-  }
-});
-
-// Зменшення значення інпута на 1 з додаванням нуля та обмеженням до 0
-decrementButtonLong.addEventListener("click", () => {
-  let currentValue = parseInt(longInput.value);
-  if (currentValue > 0) {
-    currentValue = (currentValue - 1).toString().padStart(2, "0");
-    longInput.value = currentValue;
-  }
-});
-
-// function increaseInputValue(longInput, incrementButtonLong) {
-//   incrementButtonLong.addEventListener('click', () => {
-//     let currentValue = parseInt(longInput.value);
-//     if (currentValue < 60) {
-//       currentValue = (currentValue + 1).toString().padStart(2, '0');
-//       longInput.value = currentValue;
-//       }
-//       return;
-//   });
-// }
-
-// increaseInputValue(longInput, incrementButtonLong);
-
-// function decreaseInputValue(longInput, decrementButtonLong) {
-//   decrementButtonLong.addEventListener('click', () => {
-//     let currentValue = parseInt(longInput.value);
-//     if (currentValue > 0) {
-//       currentValue = (currentValue - 1).toString().padStart(2, '0');
-//       longInput.value = currentValue;
-//       }
-//       return;
-//   });
-// }
-
-// decreaseInputValue(longInput, decrementButtonLong);
-
-//NOTE - змінна яка контролює введення тільки цифр
-const validateTimeInput = (e) => {
-  const validatedInput = e.target.value.replace(/[^0-9]/g, "").substring(0, 2);
-  e.target.value = validatedInput;
-};
-
-minutes.addEventListener("keyup", validateTimeInput);
-seconds.addEventListener("keyup", validateTimeInput);
-
-//NOTE - скидання таймера
+//NOTE - Функція скидання таймера
 const resetTimer = () => {
   clearInterval(timer);
-  seconds.value = originalSeconds;
-  minutes.value = originalMinutes;
   startButton.innerText = "Start";
   ring.classList.remove("ending");
   running = false;
 };
 
+//NOTE - Функція форматування чисел з лідируючими нулями
 const padNumber = (number) => {
   if (number < 10) {
     return "0" + number;
@@ -268,10 +207,4 @@ const padNumber = (number) => {
   return number;
 };
 
-const setOriginalTime = () => {
-  originalMinutes = padNumber(parseInt(minutes.value));
-  originalSeconds = padNumber(parseInt(seconds.value));
-};
-
-setOriginalTime();
 resetTimer();
