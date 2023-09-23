@@ -43,6 +43,10 @@ circle {
   pointer-events: none;
 }
 
+input[type=number]::-webkit-inner-spin-button {
+  display: none;
+}
+
 svg path {
   transition: all 0.3s linear;
 }
@@ -130,6 +134,7 @@ svg path {
   position: relative;
 }
 .timer__main-colon {
+  padding-left: 1px;
   margin-top: -10px;
   font-weight: 700;
   color: rgb(215, 224, 255);
@@ -260,7 +265,7 @@ svg path {
 }
 .timer__modal-arrow svg {
   box-sizing: content-box;
-  padding: 4px;
+  padding: 8px;
 }
 .timer__modal-arrow svg:hover path {
   stroke: rgb(30, 33, 63);

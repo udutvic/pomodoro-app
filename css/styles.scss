@@ -52,9 +52,13 @@ circle {
   width: 150px;
   text-align: center;
   outline: none;
-  pointer-events: none;
+  pointer-events: none;  
 }
 
+input[type="number"]::-webkit-inner-spin-button
+ {
+  display: none;
+}
 
 svg path {
   transition: all 0.3s linear;
@@ -174,6 +178,7 @@ svg path {
     // .timer__main-colon
 
     &-colon {
+      padding-left: 1px;
       margin-top: -10px;
       font-weight: 700;
       color: $color-light-blue-2;
@@ -342,7 +347,7 @@ font-weight: 700;
 
 &-arrow svg {
   box-sizing: content-box;
-  padding: 4px;
+  padding: 8px;
 }
 
 &-arrow svg:hover path {

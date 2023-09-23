@@ -35,18 +35,21 @@ let originalMinutes = 0;
 let originalSeconds = 0;
 let totalSeconds;
 
-//NOTE - функція для активації кнопок
-function changeContent(target) {
+// Функція для активації кнопок 
+function changeContent(target) { 
+  // Оновлення кнопок
   const buttons = document.querySelectorAll(".timer__switch-btn");
   buttons.forEach((button) => {
     button.classList.remove("active");
   });
-  target.classList.add("active");
+  target.classList.add("active");  
+  
 }
 
-//NOTE - обробник подій при натисканні на кнопку
+// Обробник подій при натисканні на кнопку
 buttons.forEach((button) => {
   button.addEventListener("click", function (e) {
+    // Якщо таймер запущено, відображаємо повідомлення і повертаємося
     if (running) {
       showNotification.style.display = "block";
       setTimeout(() => {
@@ -56,10 +59,8 @@ buttons.forEach((button) => {
     }
 
     changeContent(e.target);
-    let buttonText = e.target.textContent.trim();
-    // console.log(buttonText);
 
-    let data = buttonData[buttonText];
+    const data = buttonData[e.target.textContent.trim()];
     if (data) {
       minutes.value = data.minutes;
       seconds.value = data.seconds;
@@ -127,8 +128,7 @@ settingsButton.addEventListener("click", () => {
     // pauseTimer();
     return;
   }
-  // seconds.disabled = false;
-  // minutes.disabled = false;
+  
   if (!running) {
     modalBlock.style.display = "block";
 
@@ -143,11 +143,9 @@ function updatePomodoroTimer() {
 
   if (!activeButton) {
     return;
-  }
+  }  
 
-  const buttonText = activeButton.textContent.trim();
-
-  const data = buttonData[buttonText];
+  const data = buttonData[activeButton.textContent.trim()];
 
   if (data) {
     minutes.value = data.minutes;
