@@ -28,10 +28,18 @@ const modalBlock = document.querySelector(".hidden");
 const closeButton = document.querySelector(".timer__modal-close");
 const showNotification = document.querySelector(".timer__notification");
 const applyButton = document.querySelector(".timer__modal-btn");
+let circleSvg = document.querySelector(".timer__main-circle");
+let mainContainer = document.querySelector(".timer__main-container");
 let startTime = 0;
 let timer = null;
 let running = false;
 let totalSeconds;
+
+//NOTE - обчислення обсяга кола
+const radiusInPercentage = parseFloat(circleSvg.getAttribute("r"));
+const containerWidth = mainContainer.clientWidth;
+const radiusInPixels = (radiusInPercentage / 100) * containerWidth;
+const circumference = radiusInPixels * 2 * Math.PI;
 
 //NOTE - Функція для активації кнопок
 function changeContent(target) {
@@ -87,9 +95,22 @@ const startTimer = () => {
     const minutesLeft = Math.floor(secondsLeft / 60);
     seconds.value = padNumber(secondsLeft % 60);
     minutes.value = padNumber(minutesLeft);
-    console.log(secondsLeft);
+
+    let currentdashArray = circumference;
+
+    const updateCircle = () => {
+      currentDashoffset =
+        (currentdashArray * (totalSeconds - secondsLeft)) / totalSeconds;
+      circleSvg.style.strokeDashoffset = `${currentDashoffset}px`;
+      circleSvg.style.strokeDasharray = `${currentdashArray}px`;
+    };
+
+    updateCircle();
+
     if (secondsLeft === 0 && minutesLeft <= 0) {
       finishTimer();
+      circleSvg.style.strokeDashoffset = 0;
+      updatePomodoroTimer();
     }
   }, 1000);
 };
@@ -112,6 +133,24 @@ const finishTimer = () => {
     resetTimer();
   }, 0);
 };
+
+//NOTE - Функція форматування чисел з лідируючими нулями
+const padNumber = (number) => {
+  if (number < 10) {
+    return "0" + number;
+  }
+  return number;
+};
+
+//NOTE - Функція скидання таймера
+const resetTimer = () => {
+  clearInterval(timer);
+  startButton.innerText = "Start";
+  ring.classList.remove("ending");
+  running = false;
+};
+
+resetTimer();
 
 //NOTE - Обробник подій для кнопки налаштування
 settingsButton.addEventListener("click", () => {
@@ -160,8 +199,8 @@ applyButton.addEventListener("click", () => {
 });
 
 //NOTE - Функція, яка збільшує значення
-function increaseInputValue(input, incrementButton) {
-  incrementButton.addEventListener("click", () => {
+function increaseInputValue(input, increment) {
+  increment.addEventListener("click", () => {
     let currentValue = parseInt(input.value);
     if (currentValue < 60) {
       currentValue = (currentValue + 1).toString().padStart(2, "0");
@@ -176,8 +215,8 @@ increaseInputValue(shortInput, incrementButtonShort);
 increaseInputValue(longInput, incrementButtonLong);
 
 //NOTE - Функція, яка зменшує значення
-function decreaseInputValue(input, decrementButton) {
-  decrementButton.addEventListener("click", () => {
+function decreaseInputValue(input, decrement) {
+  decrement.addEventListener("click", () => {
     let currentValue = parseInt(input.value);
     if (currentValue > 0) {
       currentValue = (currentValue - 1).toString().padStart(2, "0");
@@ -190,21 +229,3 @@ function decreaseInputValue(input, decrementButton) {
 decreaseInputValue(pomodoroInput, decrementButton);
 decreaseInputValue(shortInput, decrementButtonShort);
 decreaseInputValue(longInput, decrementButtonLong);
-
-//NOTE - Функція скидання таймера
-const resetTimer = () => {
-  clearInterval(timer);
-  startButton.innerText = "Start";
-  ring.classList.remove("ending");
-  running = false;
-};
-
-//NOTE - Функція форматування чисел з лідируючими нулями
-const padNumber = (number) => {
-  if (number < 10) {
-    return "0" + number;
-  }
-  return number;
-};
-
-resetTimer();

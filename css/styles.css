@@ -26,10 +26,6 @@ button {
   stroke: #900a0a;
 }
 
-circle {
-  stroke-dashoffset: 0px;
-}
-
 .timer__main-minutes > input[type=number], .timer__main-seconds > input[type=number] {
   border: none;
   background: inherit;
@@ -121,7 +117,6 @@ svg path {
   stroke: rgb(248, 112, 112);
   stroke-width: 10;
   stroke-linecap: round;
-  stroke-dasharray: 1034px;
   transform: rotate(-90deg);
   transform-origin: center center;
   transition: stroke-dashoffset 1s linear, stroke 0.8s linear;

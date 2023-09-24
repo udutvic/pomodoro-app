@@ -5,7 +5,7 @@ $color-dark-blue-2: rgb(22, 25, 50);
 $color-white: rgb(255, 255, 255);
 $color-light-grey: rgb(239, 241, 250);
 $color-red: rgba(248, 112, 112);
-$dash-array: 1034px;
+// $dash-array: 1034px;
 
 *,
 *::after,
@@ -37,13 +37,12 @@ button {
   stroke: #900a0a;
 }
 
-circle {
-  stroke-dashoffset: calc($dash-array - ($dash-array * 100) / 100);
-}
+// circle {
+//   stroke-dashoffset: calc($dash-array - ($dash-array * 100) / 100);
+// }
 
 .timer__main-minutes > input[type="number"],.timer__main-seconds > input[type="number"] {  
   border: none;
-  // border-bottom: 1px dashed white;
   background: inherit;
   color: $color-light-blue-2;
   font-weight: 700;  
@@ -152,12 +151,12 @@ svg path {
     &-circle {
       stroke: $color-red;
       stroke-width: 10;
-      stroke-linecap: round;
-      stroke-dasharray: $dash-array;
+      stroke-linecap: round;  
+      // stroke-dasharray: $dash-array;
       transform: rotate(-90deg);
-      transform-origin: center center;
+      transform-origin: center center;      
       transition: stroke-dashoffset 1s linear, stroke 0.8s linear;
-    }
+    } 
 
     // .timer__main-clock
 
