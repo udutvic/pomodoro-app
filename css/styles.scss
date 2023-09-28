@@ -314,7 +314,8 @@ svg path {
 
     &-time {
       display: flex;
-      flex-direction: column;      
+      flex-direction: column;
+      gap: 20px;      
     }
 
     &-time h4, &-font h4, &-color h4{
@@ -326,8 +327,7 @@ svg path {
     &-time h4 {
       color: #161932;
       font-family: "Roboto Slab", serif;
-      font-weight: 700;
-      margin-bottom: 22px;
+      font-weight: 700;     
     }
 
     &-time > div, &-font, &-color {
@@ -415,7 +415,7 @@ margin-left: 11px;
   }
 }
 
-@media (max-width: 460px) {
+@media (max-width: 600px) {
   .timer__main-minutes > input[type="number"],
   .timer__main-seconds > input[type="number"] {
     font-size: 80px;

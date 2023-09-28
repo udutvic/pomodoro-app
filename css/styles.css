@@ -242,6 +242,7 @@ svg path {
 .modal__modal-time {
   display: flex;
   flex-direction: column;
+  gap: 20px;
 }
 .modal__modal-time h4, .modal__modal-font h4, .modal__modal-color h4 {
   text-transform: uppercase;
@@ -252,7 +253,6 @@ svg path {
   color: #161932;
   font-family: "Roboto Slab", serif;
   font-weight: 700;
-  margin-bottom: 22px;
 }
 .modal__modal-time > div, .modal__modal-font, .modal__modal-color {
   display: flex;
@@ -328,7 +328,7 @@ svg path {
   top: 25px;
 }
 
-@media (max-width: 460px) {
+@media (max-width: 600px) {
   .timer__main-minutes > input[type=number],
   .timer__main-seconds > input[type=number] {
     font-size: 80px;
