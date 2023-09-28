@@ -26,7 +26,8 @@ button {
   stroke: #900a0a;
 }
 
-.timer__main-minutes > input[type=number], .timer__main-seconds > input[type=number] {
+.timer__main-minutes > input[type=number],
+.timer__main-seconds > input[type=number] {
   border: none;
   background: inherit;
   color: rgb(215, 224, 255);
@@ -114,6 +115,8 @@ svg path {
   position: absolute;
 }
 .timer__main-circle {
+  --dash-array: 0px;
+  stroke-dasharray: var(--dash-array);
   stroke: rgb(248, 112, 112);
   stroke-width: 10;
   stroke-linecap: round;
@@ -169,118 +172,6 @@ svg path {
     transform: rotate(360deg);
   }
 }
-.timer__modal {
-  width: 540px;
-  height: 464px;
-  border-radius: 25px;
-  background: #fff;
-  position: absolute;
-  top: 206px;
-}
-.timer__modal-header {
-  align-items: center;
-  border-bottom: 1px solid #e3e1e1;
-  display: flex;
-  justify-content: space-between;
-  padding: 34px 39px;
-}
-.timer__modal-header h3 {
-  color: rgb(22, 25, 50);
-  font-family: Kumbh Sans;
-  font-size: 28px;
-  font-weight: 700;
-}
-.timer__modal-close {
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-}
-.timer__modal-close-icon {
-  box-sizing: content-box;
-}
-.timer__modal-close-icon:hover path {
-  fill: rgb(30, 33, 63);
-  opacity: 1;
-}
-.timer__modal-form {
-  padding: 24px 39px 59px;
-}
-.timer__modal-time {
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 24px;
-  border-bottom: 1px solid #e3e1e1;
-  margin-bottom: 19px;
-}
-.timer__modal-time h4 {
-  color: #161932;
-  font-family: Kumbh Sans;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 5px;
-  margin-bottom: 22px;
-}
-.timer__modal-time > div {
-  display: flex;
-  gap: 20px;
-}
-.timer__modal-time > div > div > label {
-  color: #1e213f;
-  font-family: Kumbh Sans;
-  font-size: 12px;
-  font-weight: 700;
-  opacity: 0.4;
-}
-.timer__modal-input {
-  margin-top: 8px;
-  width: 140px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  padding-left: 16px;
-  border-radius: 10px;
-  background: #EFF1FA;
-}
-.timer__modal-number {
-  width: 90px;
-  border: none;
-  pointer-events: none;
-  background-color: transparent;
-  color: #1E213F;
-  font-family: Kumbh Sans;
-  font-size: 14px;
-  font-weight: 700;
-}
-.timer__modal-arrow {
-  display: flex;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-}
-.timer__modal-arrow svg {
-  box-sizing: content-box;
-  padding: 8px;
-}
-.timer__modal-arrow svg:hover path {
-  stroke: rgb(30, 33, 63);
-  stroke-opacity: 1;
-}
-.timer__modal-btn {
-  width: 140px;
-  height: 53px;
-  border-radius: 26.5px;
-  background: rgb(248, 112, 112);
-  border: none;
-  text-align: center;
-  font-family: Kumbh Sans;
-  font-size: 16px;
-  font-weight: 700;
-  color: rgb(255, 255, 255);
-  cursor: pointer;
-  position: relative;
-  left: 50%;
-  margin-left: -70px;
-}
 .timer__notification {
   display: none;
   background-color: rgb(255, 255, 255);
@@ -292,4 +183,210 @@ svg path {
   font-weight: 600;
   max-width: 400px;
   text-align: center;
+}
+
+.modal {
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 15;
+}
+.modal-background {
+  background-color: rgb(22, 25, 50);
+  height: 100%;
+  width: 100%;
+}
+.modal__modal {
+  border-radius: 25px;
+  background: #fff;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
+.modal__modal-header {
+  align-items: center;
+  border-bottom: 1px solid #e3e1e1;
+  display: flex;
+  justify-content: space-between;
+  padding: 34px 39px;
+}
+.modal__modal-header h3 {
+  color: rgb(22, 25, 50);
+  font-family: "Roboto Slab", serif;
+  font-size: 28px;
+  font-weight: 700;
+}
+.modal__modal-close {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  height: 14px;
+}
+.modal__modal-close-icon {
+  box-sizing: content-box;
+}
+.modal__modal-close-icon:hover path {
+  fill: rgb(30, 33, 63);
+  opacity: 1;
+}
+.modal__modal-form {
+  padding: 24px 39px 2px;
+}
+.modal__modal-time, .modal__modal-font {
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e3e1e1;
+  margin-bottom: 24px;
+}
+.modal__modal-time {
+  display: flex;
+  flex-direction: column;
+}
+.modal__modal-time h4, .modal__modal-font h4, .modal__modal-color h4 {
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 5px;
+}
+.modal__modal-time h4 {
+  color: #161932;
+  font-family: "Roboto Slab", serif;
+  font-weight: 700;
+  margin-bottom: 22px;
+}
+.modal__modal-time > div, .modal__modal-font, .modal__modal-color {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+.modal__modal-font, .modal__modal-color {
+  align-items: center;
+}
+.modal__modal-time > div > div > label {
+  color: #1e213f;
+  font-family: "Roboto Slab", serif;
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0.4;
+}
+.modal__modal-font > div > button, .modal__modal-color > div > button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  margin-left: 11px;
+}
+.modal__modal-input {
+  margin-top: 8px;
+  width: 140px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+  border-radius: 10px;
+  background: #eff1fa;
+}
+.modal__modal-number {
+  width: 90px;
+  border: none;
+  pointer-events: none;
+  background-color: transparent;
+  color: #1e213f;
+  font-family: "Roboto Slab", serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+.modal__modal-arrow {
+  display: flex;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.modal__modal-arrow svg {
+  box-sizing: content-box;
+  padding: 8px;
+}
+.modal__modal-arrow svg:hover path {
+  stroke: rgb(30, 33, 63);
+  stroke-opacity: 1;
+}
+.modal__modal-btn {
+  width: 140px;
+  height: 53px;
+  border-radius: 26.5px;
+  background: rgb(248, 112, 112);
+  border: none;
+  text-align: center;
+  font-family: "Roboto Slab", serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  position: relative;
+  left: 50%;
+  margin-left: -70px;
+  top: 25px;
+}
+
+@media (max-width: 460px) {
+  .timer__main-minutes > input[type=number],
+  .timer__main-seconds > input[type=number] {
+    font-size: 80px;
+    width: 100px;
+  }
+  .timer__logo {
+    width: 117px;
+    margin-bottom: 45px;
+  }
+  .timer__switch {
+    width: 327px;
+    gap: 12px;
+  }
+  .timer__switch-btn {
+    width: 105px;
+    font-size: 12px;
+  }
+  .timer__main {
+    width: 300px;
+    height: 300px;
+  }
+  .timer__main-container {
+    width: 268px;
+    height: 268px;
+  }
+  .timer__main-clock {
+    font-size: 80px;
+    margin: 20px auto;
+  }
+  .timer__main-circle {
+    --dash-array: 0px;
+    stroke-dasharray: var(--dash-array);
+  }
+  .modal__modal {
+    width: 327px;
+  }
+  .modal__modal-time h4, .modal__modal-font h4, .modal__modal-color h4 {
+    text-align: center;
+  }
+  .modal__modal-font, .modal__modal-color {
+    flex-direction: column;
+  }
+  .modal__modal-time > div {
+    flex-direction: column;
+    gap: 4px;
+  }
+  .modal__modal-time > div > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .modal__modal-header {
+    padding: 24px 24px 28px;
+  }
+  .modal__modal-header h3 {
+    font-size: 20px;
+  }
+  .modal__modal-form {
+    padding: 24px 25px 2px;
+  }
 }/*# sourceMappingURL=styles.css.map */

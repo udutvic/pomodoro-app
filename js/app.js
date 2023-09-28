@@ -14,32 +14,39 @@ minutes.value = buttonData["pomodoro"].minutes;
 seconds.value = buttonData["pomodoro"].seconds;
 let pomodoroInput = document.querySelector(".pomodoro");
 pomodoroInput.value = buttonData["pomodoro"].minutes;
-const incrementButton = document.querySelector(".pomo .timer__modal-arrow.up");
-const decrementButton = document.querySelector(".pomo .timer__modal-arrow.down");
+const incrementButton = document.querySelector(".pomo .modal__modal-arrow.up");
+const decrementButton = document.querySelector(".pomo .modal__modal-arrow.down");
 let shortInput = document.querySelector(".short-break");
 shortInput.value = buttonData["short break"].minutes;
-const incrementButtonShort = document.querySelector(".short .timer__modal-arrow.up");
-const decrementButtonShort = document.querySelector(".short .timer__modal-arrow.down");
+const incrementButtonShort = document.querySelector(".short .modal__modal-arrow.up");
+const decrementButtonShort = document.querySelector(".short .modal__modal-arrow.down");
 let longInput = document.querySelector(".long-break");
 longInput.value = buttonData["long break"].minutes;
-const incrementButtonLong = document.querySelector(".long .timer__modal-arrow.up");
-const decrementButtonLong = document.querySelector(".long .timer__modal-arrow.down");
+const incrementButtonLong = document.querySelector(".long .modal__modal-arrow.up");
+const decrementButtonLong = document.querySelector(".long .modal__modal-arrow.down");
+const motionSection = document.querySelector(".modal__modal");
 const modalBlock = document.querySelector(".hidden");
-const closeButton = document.querySelector(".timer__modal-close");
+const closeButton = document.querySelector(".modal__modal-close");
 const showNotification = document.querySelector(".timer__notification");
-const applyButton = document.querySelector(".timer__modal-btn");
+const applyButton = document.querySelector(".modal__modal-btn");
 let circleSvg = document.querySelector(".timer__main-circle");
 let mainContainer = document.querySelector(".timer__main-container");
 let startTime = 0;
 let timer = null;
 let running = false;
 let totalSeconds;
+let fixedTotalTimer;
+let start = null;
 
-//NOTE - обчислення обсяга кола
+//NOTE - обчислення обсяга кола по розмірах контейнера де воно знаходитьс
 const radiusInPercentage = parseFloat(circleSvg.getAttribute("r"));
 const containerWidth = mainContainer.clientWidth;
 const radiusInPixels = (radiusInPercentage / 100) * containerWidth;
 const circumference = radiusInPixels * 2 * Math.PI;
+
+//NOTE - створення зміної яка буде вставляти в dash-array значення обчисленого об'єма кола
+let currentDasharray = circumference;
+circleSvg.style.setProperty("--dash-array", `${currentDasharray}`);
 
 //NOTE - Функція для активації кнопок
 function changeContent(target) {
@@ -68,6 +75,9 @@ buttons.forEach((button) => {
       minutes.value = data.minutes;
       seconds.value = data.seconds;
     }
+    circleSvg.style.strokeDashoffset = 0;
+    
+    fixTotalTimer();
   });
 });
 
@@ -79,6 +89,13 @@ startButton.addEventListener("click", () => {
     pauseTimer();
   }
 });
+
+//NOTE - функція для фіксованого значення суми хвилин та секунд для роботи кола
+function fixTotalTimer() {
+  const secondsTime = parseInt(seconds.value);
+  const minutesTime = parseInt(minutes.value);
+  fixedTotalTimer = secondsTime + minutesTime * 60;
+}
 
 //NOTE - Функція старту таймера
 const startTimer = () => {
@@ -96,20 +113,12 @@ const startTimer = () => {
     seconds.value = padNumber(secondsLeft % 60);
     minutes.value = padNumber(minutesLeft);
 
-    let currentdashArray = circumference;
+    let percentage = ((secondsLeft * 60 + minutesLeft) / (fixedTotalTimer * 60)) * 100;   
 
-    const updateCircle = () => {
-      currentDashoffset =
-        (currentdashArray * (totalSeconds - secondsLeft)) / totalSeconds;
-      circleSvg.style.strokeDashoffset = `${currentDashoffset}px`;
-      circleSvg.style.strokeDasharray = `${currentdashArray}px`;
-    };
-
-    updateCircle();
-
+    circleSvg.style.strokeDashoffset = `calc(var(--dash-array) - (var(--dash-array) * ${percentage}) / 100)`;
+    
     if (secondsLeft === 0 && minutesLeft <= 0) {
-      finishTimer();
-      circleSvg.style.strokeDashoffset = 0;
+      finishTimer();      
       updatePomodoroTimer();
     }
   }, 1000);
@@ -119,15 +128,15 @@ const startTimer = () => {
 const pauseTimer = () => {
   running = false;
   startButton.innerText = "Start";
-  clearInterval(timer);
+  clearInterval(timer);  
 };
 
 //NOTE - Функція фініша таймера
 const finishTimer = () => {
   clearInterval(timer);
   ring.classList.add("ending");
-  console.log(ring.classList);
-  clearInterval(timer);
+  console.log(ring.classList);  
+  circleSvg.style.strokeDashoffset = 0;
   setTimeout(() => {
     alert("Time's up!");
     resetTimer();
@@ -159,17 +168,26 @@ settingsButton.addEventListener("click", () => {
     setTimeout(() => {
       showNotification.style.display = "none";
     }, 3000);
-    // pauseTimer();
     return;
   }
 
-  if (!running) {
+  if (!running) {   
+    motionSection.style.transform = 'translate(-50%, calc(100vh - 50%))';
+    motionSection.style.transition = 'transform 0.6s ease-out';
     modalBlock.style.display = "block";
+    
+    setTimeout(() => {
+      motionSection.style.transform = 'translate(-50%, -50%)';
+    }, 0);
 
-    closeButton.addEventListener("click", () => {
-      modalBlock.style.display = "none";
+    closeButton.addEventListener("click", () => {     
+      motionSection.style.transform = 'translate(-50%, calc(100vh - 50%))';
+     
+      setTimeout(() => {
+        modalBlock.style.display = "none";
+      }, 600);
     });
-  }
+  }  
 });
 
 //NOTE - Функція оновлення таймера при виборі хвилин
@@ -186,6 +204,7 @@ function updatePomodoroTimer() {
     minutes.value = data.minutes;
     seconds.value = data.seconds;
   }
+  fixTotalTimer();
 }
 
 //NOTE - Кнопка підвердження і закриття модального вікна
@@ -194,15 +213,24 @@ applyButton.addEventListener("click", () => {
   buttonData["short break"].minutes = shortInput.value.toString();
   buttonData["long break"].minutes = longInput.value.toString();
 
-  updatePomodoroTimer();
-  modalBlock.style.display = "none";
+  updatePomodoroTimer();  
+  circleSvg.style.strokeDashoffset = 0;
+
+  motionSection.style.transform = 'translate(-50%, calc(100vh - 50%))';
+  
+  setTimeout(() => {
+    modalBlock.style.display = "none";
+  }, 600);
 });
 
 //NOTE - Функція, яка збільшує значення
 function increaseInputValue(input, increment) {
   increment.addEventListener("click", () => {
     let currentValue = parseInt(input.value);
-    if (currentValue < 60) {
+    if (currentValue < 1) {
+      input.value = "01";
+    }
+    else if (currentValue < 60) {
       currentValue = (currentValue + 1).toString().padStart(2, "0");
       input.value = currentValue;
     }
@@ -218,7 +246,10 @@ increaseInputValue(longInput, incrementButtonLong);
 function decreaseInputValue(input, decrement) {
   decrement.addEventListener("click", () => {
     let currentValue = parseInt(input.value);
-    if (currentValue > 0) {
+    if (currentValue < 1) {
+      input.value = "01";
+    }
+    else if (currentValue > 1) {
       currentValue = (currentValue - 1).toString().padStart(2, "0");
       input.value = currentValue;
     }

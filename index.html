@@ -46,7 +46,7 @@
                 cx="50%"
                 cy="50%"
                 r="45%"
-                fill="none" 
+                fill="none" style="stroke-dashoffset: calc(var(--dash-array) - (var(--dash-array) * 100) / 100)"
               ></circle>
             </svg>
             <div class="timer__main-clock">
@@ -79,184 +79,191 @@
               d="M26.965 17.682l-2.927-2.317c.055-.448.097-.903.097-1.365 0-.462-.042-.917-.097-1.365l2.934-2.317a.702.702 0 00.167-.896l-2.775-4.851a.683.683 0 00-.847-.301l-3.454 1.407a10.506 10.506 0 00-2.345-1.379l-.52-3.71A.716.716 0 0016.503 0h-5.55a.703.703 0 00-.687.588l-.52 3.71c-.847.357-1.63.819-2.345 1.379L3.947 4.27a.691.691 0 00-.847.301L.325 9.422a.705.705 0 00.167.896l2.927 2.317c-.055.448-.097.903-.097 1.365 0 .462.042.917.097 1.365L.492 17.682a.702.702 0 00-.167.896L3.1 23.429a.683.683 0 00.847.301L7.4 22.323a10.506 10.506 0 002.345 1.379l.52 3.71c.056.329.34.588.687.588h5.55a.703.703 0 00.687-.588l.52-3.71c.847-.357 1.631-.819 2.346-1.379l3.454 1.407c.313.119.673 0 .847-.301l2.775-4.851a.705.705 0 00-.167-.896zM13.73 18.9c-2.685 0-4.857-2.191-4.857-4.9 0-2.709 2.172-4.9 4.857-4.9 2.684 0 4.856 2.191 4.856 4.9 0 2.71-2.172 4.9-4.856 4.9z"
             ></path>
           </svg>
-        </button>
-        <article class="timer__modal hidden">
-          <header class="timer__modal-header">
-            <h3>Settings</h3>
-            <button class="timer__modal-close">
-              <svg
-                class="timer__modal-close-icon"
-                xmlns="http://www.w3.org/2000/svg"
-                width="14"
-                height="14"
-                viewBox="0 0 14 14"
-              >
-                <path
-                  opacity="0.5"
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M13.364 2.0502L11.9497 0.635986L6.99999 5.58573L2.05025 0.635986L0.636032 2.0502L5.58578 6.99995L0.636032 11.9497L2.05025 13.3639L6.99999 8.41416L11.9497 13.3639L13.364 11.9497L8.41421 6.99995L13.364 2.0502Z"
-                  fill="#1E213F"
-                />
-              </svg>
-            </button>
-          </header>
-          <article class="timer__modal-form">
-            <div class="timer__modal-time">
-              <h4>TIME (MINUTES)</h4>
-              <div>
-                <div>
-                  <label for="pomodoro">pomodoro</label>
-                  <div class="timer__modal-input pomo">
-                    <input
-                      class="timer__modal-number pomodoro"
-                      type="number" value=""
-                    />
-                    <div>
-                      <button class="timer__modal-arrow up">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="14"
-                          height="7"
-                          viewBox="0 0 14 7"
-                          fill="none"
-                        >
-                          <path
-                            d="M1 6L7 2L13 6"
-                            stroke="#1E213F"
-                            stroke-opacity="0.25"
-                            stroke-width="2"
-                          />
-                        </svg>
-                      </button>
-                      <button class="timer__modal-arrow down">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="14"
-                          height="7"
-                          viewBox="0 0 14 7"
-                          fill="none"
-                        >
-                          <path
-                            d="M1 1L7 5L13 1"
-                            stroke="#1E213F"
-                            stroke-opacity="0.25"
-                            stroke-width="2"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <label for="short_break">short break</label>
-                  <div class="timer__modal-input short">
-                    <input 
-                      class="timer__modal-number short-break"
-                      type="number" value=""
-                    />
-                    <div>
-                      <button class="timer__modal-arrow up">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="14"
-                          height="7"
-                          viewBox="0 0 14 7"
-                          fill="none"
-                        >
-                          <path
-                            d="M1 6L7 2L13 6"
-                            stroke="#1E213F"
-                            stroke-opacity="0.25"
-                            stroke-width="2"
-                          />
-                        </svg>
-                      </button>
-                      <button class="timer__modal-arrow down">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="14"
-                          height="7"
-                          viewBox="0 0 14 7"
-                          fill="none"
-                        >
-                          <path
-                            d="M1 1L7 5L13 1"
-                            stroke="#1E213F"
-                            stroke-opacity="0.25"
-                            stroke-width="2"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <label for="long_break">long break</label>
-                  <div class="timer__modal-input long">
-                    <input
-                      class="timer__modal-number long-break"
-                      type="number" value=""
-                    />
-                    <div>
-                      <button class="timer__modal-arrow up">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="14"
-                          height="7"
-                          viewBox="0 0 14 7"
-                          fill="none"
-                        >
-                          <path
-                            d="M1 6L7 2L13 6"
-                            stroke="#1E213F"
-                            stroke-opacity="0.25"
-                            stroke-width="2"
-                          />
-                        </svg>
-                      </button>
-                      <button class="timer__modal-arrow down">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="14"
-                          height="7"
-                          viewBox="0 0 14 7"
-                          fill="none"
-                        >
-                          <path
-                            d="M1 1L7 5L13 1"
-                            stroke="#1E213F"
-                            stroke-opacity="0.25"
-                            stroke-width="2"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="timer__modal-font">
-              <h4>Font</h4>
-              <button></button>
-              <button></button>
-              <button></button>
-            </div>
-            <div class="timer__modal-color">
-              <h4>Color</h4>
-              <button></button>
-              <button></button>
-              <button></button>
-            </div>
-          </article>
-          <button class="timer__modal-btn">Apply</button>
-        </article>
+        </button>       
         <div class="timer__notification">
           <p>A timer is running. Pause it to change mode!</p>
         </div>
       </section>
     </main>
+    <section class="modal hidden">
+      <div class="modal-background" style="opacity: 0.5;"></div>
+      <article class="modal__modal">
+        <header class="modal__modal-header">
+          <h3>Settings</h3>
+          <button class="modal__modal-close">
+            <svg
+              class="modal__modal-close-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+            >
+              <path
+                opacity="0.5"
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M13.364 2.0502L11.9497 0.635986L6.99999 5.58573L2.05025 0.635986L0.636032 2.0502L5.58578 6.99995L0.636032 11.9497L2.05025 13.3639L6.99999 8.41416L11.9497 13.3639L13.364 11.9497L8.41421 6.99995L13.364 2.0502Z"
+                fill="#1E213F"
+              />
+            </svg>
+          </button>
+        </header>
+        <article class="modal__modal-form">
+          <div class="modal__modal-time">
+            <h4>TIME (MINUTES)</h4>
+            <div>
+              <div>
+                <label for="pomodoro">pomodoro</label>
+                <div class="modal__modal-input pomo">
+                  <input
+                    class="modal__modal-number pomodoro"
+                    type="number" value=""
+                  />
+                  <div>
+                    <button class="modal__modal-arrow up">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="7"
+                        viewBox="0 0 14 7"
+                        fill="none"
+                      >
+                        <path
+                          d="M1 6L7 2L13 6"
+                          stroke="#1E213F"
+                          stroke-opacity="0.25"
+                          stroke-width="2"
+                        />
+                      </svg>
+                    </button>
+                    <button class="modal__modal-arrow down">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="7"
+                        viewBox="0 0 14 7"
+                        fill="none"
+                      >
+                        <path
+                          d="M1 1L7 5L13 1"
+                          stroke="#1E213F"
+                          stroke-opacity="0.25"
+                          stroke-width="2"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label for="short_break">short break</label>
+                <div class="modal__modal-input short">
+                  <input 
+                    class="modal__modal-number short-break"
+                    type="number" value=""
+                  />
+                  <div>
+                    <button class="modal__modal-arrow up">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="7"
+                        viewBox="0 0 14 7"
+                        fill="none"
+                      >
+                        <path
+                          d="M1 6L7 2L13 6"
+                          stroke="#1E213F"
+                          stroke-opacity="0.25"
+                          stroke-width="2"
+                        />
+                      </svg>
+                    </button>
+                    <button class="modal__modal-arrow down">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="7"
+                        viewBox="0 0 14 7"
+                        fill="none"
+                      >
+                        <path
+                          d="M1 1L7 5L13 1"
+                          stroke="#1E213F"
+                          stroke-opacity="0.25"
+                          stroke-width="2"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label for="long_break">long break</label>
+                <div class="modal__modal-input long">
+                  <input
+                    class="modal__modal-number long-break"
+                    type="number" value=""
+                  />
+                  <div>
+                    <button class="modal__modal-arrow up">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="7"
+                        viewBox="0 0 14 7"
+                        fill="none"
+                      >
+                        <path
+                          d="M1 6L7 2L13 6"
+                          stroke="#1E213F"
+                          stroke-opacity="0.25"
+                          stroke-width="2"
+                        />
+                      </svg>
+                    </button>
+                    <button class="modal__modal-arrow down">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="7"
+                        viewBox="0 0 14 7"
+                        fill="none"
+                      >
+                        <path
+                          d="M1 1L7 5L13 1"
+                          stroke="#1E213F"
+                          stroke-opacity="0.25"
+                          stroke-width="2"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal__modal-font">
+            <h4>Font</h4>
+            <div>
+              <button></button>
+              <button></button>
+              <button></button>
+            </div>
+          </div>
+          <div class="modal__modal-color">
+            <h4>Color</h4>
+            <div>
+              <button></button>
+              <button></button>
+              <button></button>
+            </div>
+          </div>
+        </article>
+        <button class="modal__modal-btn">Apply</button>
+      </article>
+    </section>
     <script src="./js/app.js"></script>
-    <!-- <script src="./js/app1.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script> 
   </body>
 </html>
