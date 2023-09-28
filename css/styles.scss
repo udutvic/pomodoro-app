@@ -148,7 +148,7 @@ svg path {
       stroke-dasharray: var(--dash-array);
       stroke: $color-red;
       stroke-width: 10;
-      stroke-linecap: round;      
+      stroke-linecap: round;
       transform: rotate(-90deg);
       transform-origin: center center;
       transition: stroke-dashoffset 1s linear, stroke 0.8s linear;
@@ -233,7 +233,7 @@ svg path {
         transform: rotate(360deg);
       }
     }
-  } 
+  }
 
   &__notification {
     display: none;
@@ -268,7 +268,7 @@ svg path {
     background: #fff;
     position: absolute;
     left: 50%;
-    top: 50%;   
+    top: 50%;
 
     // .modal__modal-header
     &-header {
@@ -306,37 +306,43 @@ svg path {
       padding: 24px 39px 2px;
     }
 
-    &-time, &-font {
+    &-time,
+    &-font {
       padding-bottom: 24px;
       border-bottom: 1px solid #e3e1e1;
       margin-bottom: 24px;
-    } 
+    }
 
     &-time {
       display: flex;
       flex-direction: column;
-      gap: 20px;      
+      gap: 20px;
     }
 
-    &-time h4, &-font h4, &-color h4{
+    &-time h4,
+    &-font h4,
+    &-color h4 {
       text-transform: uppercase;
       font-size: 13px;
       letter-spacing: 5px;
-    } 
+    }
 
     &-time h4 {
       color: #161932;
       font-family: "Roboto Slab", serif;
-      font-weight: 700;     
+      font-weight: 700;
     }
 
-    &-time > div, &-font, &-color {
+    &-time > div,
+    &-font,
+    &-color {
       display: flex;
-      gap: 20px;      
+      gap: 20px;
       justify-content: space-between;
     }
 
-    &-font, &-color {
+    &-font,
+    &-color {
       align-items: center;
     }
 
@@ -348,12 +354,102 @@ svg path {
       opacity: 0.4;
     }
 
-    &-font > div > button, &-color > div > button {
+    &-font > div,
+    &-color > div {
+      display: flex;
+      gap: 16px;
+    }
+
+    &-font-label,
+    &-color-label {
       width: 40px;
       height: 40px;
-border-radius: 50%;
-border: none;
-margin-left: 11px;
+      border-radius: 50%;
+      position: relative;
+      cursor: pointer;
+    }
+
+    &-font-label::before,
+    &-color-label::before {
+      background-color: transparent;
+      border: 0.1rem solid $color-light-grey;
+      border-radius: 50%;
+      content: "";
+      display: block;
+      height: 100%;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      transition: all 0.05s linear;
+      width: 100%;
+      z-index: -1;
+    }
+
+    @media (hover: hover) {
+      &-font-label:hover::before, &-color-label:hover::before {
+        transform: translate(-50%, -50%) scale(1.3);
+      }
+    }
+
+    &-font-label:active::before, &-color-label:active::before {
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+
+    &-font-input,
+    &-color-input {
+      height: 0;
+    opacity: 0;
+    position: absolute;
+    width: 0;
+    }
+
+    &-font-custom, &-color-custom {
+      background-color: $color-light-grey;
+    border-radius: 50%;
+    display: block;
+    height: 100%;
+    transition: all .3s linear;
+    width: 100%;
+    }
+
+    &-font-custom::after {
+    content: "Aa";
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 600;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    }
+
+    &-color-custom::after {
+    border-color: $color-dark-blue-2;
+    border-bottom: 0.2rem solid;
+    border-left: 0.2rem solid;
+    content: "";
+    display: block;
+    height: 18%;
+    left: 50%;
+    position: absolute;
+    top: 50%;    
+    transform: translate(-50%,calc(-50% - 0.1rem)) rotate(-45deg) scale(0);
+    transition: all .2s linear;
+    width: 34%;
+    }
+
+    &-font-input:checked + &-font-custom {
+      background-color: $color-dark-blue-2;
+    }
+    
+    &-font-input:checked + &-font-custom::after {
+      color: $color-white;
+    }
+
+    &-color-input:checked + &-color-custom::after {
+      transform: translate(-50%, calc(-50% - 0.1rem)) rotate(-45deg) scale(1);
     }
 
     &-input {
@@ -458,11 +554,14 @@ margin-left: 11px;
   .modal__modal {
     width: 327px;
 
-    &-time h4, &-font h4, &-color h4 {
-      text-align: center;      
+    &-time h4,
+    &-font h4,
+    &-color h4 {
+      text-align: center;
     }
 
-    &-font, &-color {
+    &-font,
+    &-color {
       flex-direction: column;
     }
 

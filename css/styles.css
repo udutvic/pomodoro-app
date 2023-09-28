@@ -269,12 +269,86 @@ svg path {
   font-weight: 700;
   opacity: 0.4;
 }
-.modal__modal-font > div > button, .modal__modal-color > div > button {
+.modal__modal-font > div, .modal__modal-color > div {
+  display: flex;
+  gap: 16px;
+}
+.modal__modal-font-label, .modal__modal-color-label {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: none;
-  margin-left: 11px;
+  position: relative;
+  cursor: pointer;
+}
+.modal__modal-font-label::before, .modal__modal-color-label::before {
+  background-color: transparent;
+  border: 0.1rem solid rgb(239, 241, 250);
+  border-radius: 50%;
+  content: "";
+  display: block;
+  height: 100%;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  transition: all 0.05s linear;
+  width: 100%;
+  z-index: -1;
+}
+@media (hover: hover) {
+  .modal__modal-font-label:hover::before, .modal__modal-color-label:hover::before {
+    transform: translate(-50%, -50%) scale(1.3);
+  }
+}
+.modal__modal-font-label:active::before, .modal__modal-color-label:active::before {
+  transform: translate(-50%, -50%) scale(1.2);
+}
+.modal__modal-font-input, .modal__modal-color-input {
+  height: 0;
+  opacity: 0;
+  position: absolute;
+  width: 0;
+}
+.modal__modal-font-custom, .modal__modal-color-custom {
+  background-color: rgb(239, 241, 250);
+  border-radius: 50%;
+  display: block;
+  height: 100%;
+  transition: all 0.3s linear;
+  width: 100%;
+}
+.modal__modal-font-custom::after {
+  content: "Aa";
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 600;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.modal__modal-color-custom::after {
+  border-color: rgb(22, 25, 50);
+  border-bottom: 0.2rem solid;
+  border-left: 0.2rem solid;
+  content: "";
+  display: block;
+  height: 18%;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, calc(-50% - 0.1rem)) rotate(-45deg) scale(0);
+  transition: all 0.2s linear;
+  width: 34%;
+}
+.modal__modal-font-input:checked + .modal__modal-font-custom {
+  background-color: rgb(22, 25, 50);
+}
+.modal__modal-font-input:checked + .modal__modal-font-custom::after {
+  color: rgb(255, 255, 255);
+}
+.modal__modal-color-input:checked + .modal__modal-color-custom::after {
+  transform: translate(-50%, calc(-50% - 0.1rem)) rotate(-45deg) scale(1);
 }
 .modal__modal-input {
   margin-top: 8px;
