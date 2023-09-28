@@ -320,7 +320,7 @@ svg path {
 .modal__modal-font-custom::after {
   content: "Aa";
   display: block;
-  font-size: 1.5rem;
+  font-size: 15px;
   font-weight: 600;
   left: 50%;
   position: absolute;
