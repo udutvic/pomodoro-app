@@ -41,7 +41,7 @@ let start = null;
 // Функція для зміни шрифту
 function changeFont(selectedFont) {
   const htmlStyle = document.documentElement.style;
-  htmlStyle.setProperty('--font-selected', `'${selectedFont}', sans-serif`);
+  htmlStyle.setProperty('--font-selected', `'${selectedFont}'`);
 }
 
 // Функція для зміни кольору
