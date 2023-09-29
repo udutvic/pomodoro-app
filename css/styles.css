@@ -8,7 +8,7 @@
 
 body {
   background-color: rgb(30, 33, 63);
-  font-family: "Kumbh Sans", sans-serif;
+  font-family: var(--font-selected);
 }
 
 .flex {
@@ -20,6 +20,7 @@ body {
 
 button {
   transition: all 0.3s linear;
+  font-family: var(--font-selected);
 }
 
 .ring.ending {
@@ -33,10 +34,11 @@ button {
   color: rgb(215, 224, 255);
   font-weight: 700;
   font-size: 100px;
-  width: 150px;
+  width: 120px;
   text-align: center;
   outline: none;
   pointer-events: none;
+  font-family: var(--font-selected);
 }
 
 input[type=number]::-webkit-inner-spin-button {
@@ -85,7 +87,7 @@ svg path {
   color: rgb(215, 224, 255);
 }
 .timer__switch-btn.active {
-  background-color: rgb(248, 112, 112);
+  background-color: var(--color-selected);
   color: rgb(30, 33, 63);
 }
 .timer__main {
@@ -117,7 +119,7 @@ svg path {
 .timer__main-circle {
   --dash-array: 0px;
   stroke-dasharray: var(--dash-array);
-  stroke: rgb(248, 112, 112);
+  stroke: var(--color-selected);
   stroke-width: 10;
   stroke-linecap: round;
   transform: rotate(-90deg);
@@ -150,7 +152,7 @@ svg path {
   padding-left: 24px;
 }
 .timer__main-start:hover {
-  color: rgb(248, 112, 112);
+  color: var(--color-selected);
 }
 .timer__setting {
   background-color: transparent;
@@ -214,7 +216,7 @@ svg path {
 }
 .modal__modal-header h3 {
   color: rgb(22, 25, 50);
-  font-family: "Roboto Slab", serif;
+  font-family: var(--font-selected);
   font-size: 28px;
   font-weight: 700;
 }
@@ -251,7 +253,7 @@ svg path {
 }
 .modal__modal-time h4 {
   color: #161932;
-  font-family: "Roboto Slab", serif;
+  font-family: var(--font-selected);
   font-weight: 700;
 }
 .modal__modal-time > div, .modal__modal-font, .modal__modal-color {
@@ -264,7 +266,7 @@ svg path {
 }
 .modal__modal-time > div > div > label {
   color: #1e213f;
-  font-family: "Roboto Slab", serif;
+  font-family: var(--font-selected);
   font-size: 12px;
   font-weight: 700;
   opacity: 0.4;
@@ -366,7 +368,7 @@ svg path {
   pointer-events: none;
   background-color: transparent;
   color: #1e213f;
-  font-family: "Roboto Slab", serif;
+  font-family: var(--font-selected);
   font-size: 14px;
   font-weight: 700;
 }
@@ -388,10 +390,10 @@ svg path {
   width: 140px;
   height: 53px;
   border-radius: 26.5px;
-  background: rgb(248, 112, 112);
+  background: var(--color-selected);
   border: none;
   text-align: center;
-  font-family: "Roboto Slab", serif;
+  font-family: var(--font-selected);
   font-size: 16px;
   font-weight: 700;
   color: rgb(255, 255, 255);

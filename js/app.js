@@ -38,6 +38,78 @@ let totalSeconds;
 let fixedTotalTimer;
 let start = null;
 
+// Функція для зміни шрифту
+function changeFont(selectedFont) {
+  const htmlStyle = document.documentElement.style;
+  htmlStyle.setProperty('--font-selected', `'${selectedFont}', sans-serif`);
+}
+
+// Функція для зміни кольору
+function changeColor(selectedColor) {
+  const htmlStyle = document.documentElement.style;
+  htmlStyle.setProperty('--color-selected', selectedColor);
+}
+
+// Об'єкти з кольорами та шрифтами
+const colors = {
+  red: '#f87070',
+  blue: '#70F3F8',
+  violet: '#d881f8',
+};
+
+const fonts = {
+  kumbh: 'Kumbh Sans',
+  roboto: 'Roboto Slab',
+  space: 'Space Mono',
+};
+
+// Встановлюємо шрифт та колір за замовчуванням
+changeFont(fonts.kumbh);
+changeColor(colors.red);
+
+// Функція для оновлення шрифту
+function updateFont() {
+  let fontChangers = document.querySelectorAll(".modal__modal-font-input");
+  fontChangers.forEach((fontChanger) => {
+    fontChanger.addEventListener("change", () => {
+      if (fontChanger.id === "kumbh__sans") {
+        changeFont(fonts.kumbh);
+      }
+      if (fontChanger.id === "roboto__slab") {
+        changeFont(fonts.roboto);
+      }
+      if (fontChanger.id === "space__mono") {
+        changeFont(fonts.space);
+      }
+    });
+  });
+}
+
+// Функція для оновлення кольору
+function updateColor() {
+  let colorChangers = document.querySelectorAll(".modal__modal-color-input");
+  colorChangers.forEach((colorChanger) => {
+    colorChanger.addEventListener("change", () => {
+      if (colorChanger.id === "red") {
+        changeColor(colors.red);
+      }
+      if (colorChanger.id === "blue") {
+        changeColor(colors.blue);
+      }
+      if (colorChanger.id === "violet") {
+        changeColor(colors.violet);
+      }
+    });
+  });
+}
+
+// Викликаємо функції оновлення після завантаження сторінки
+document.addEventListener("DOMContentLoaded", function() {
+  updateFont();
+  updateColor();
+});
+
+
 //NOTE - обчислення обсяга кола по розмірах контейнера де воно знаходитьс
 const radiusInPercentage = parseFloat(circleSvg.getAttribute("r"));
 const containerWidth = mainContainer.clientWidth;
@@ -76,7 +148,7 @@ buttons.forEach((button) => {
       seconds.value = data.seconds;
     }
     circleSvg.style.strokeDashoffset = 0;
-    
+
     fixTotalTimer();
   });
 });
@@ -113,12 +185,12 @@ const startTimer = () => {
     seconds.value = padNumber(secondsLeft % 60);
     minutes.value = padNumber(minutesLeft);
 
-    let percentage = ((secondsLeft * 60 + minutesLeft) / (fixedTotalTimer * 60)) * 100;   
+    let percentage = ((secondsLeft * 60 + minutesLeft) / (fixedTotalTimer * 60)) * 100;
 
     circleSvg.style.strokeDashoffset = `calc(var(--dash-array) - (var(--dash-array) * ${percentage}) / 100)`;
-    
+
     if (secondsLeft === 0 && minutesLeft <= 0) {
-      finishTimer();      
+      finishTimer();
       updatePomodoroTimer();
     }
   }, 1000);
@@ -128,14 +200,14 @@ const startTimer = () => {
 const pauseTimer = () => {
   running = false;
   startButton.innerText = "Start";
-  clearInterval(timer);  
+  clearInterval(timer);
 };
 
 //NOTE - Функція фініша таймера
 const finishTimer = () => {
   clearInterval(timer);
   ring.classList.add("ending");
-  console.log(ring.classList);  
+  console.log(ring.classList);
   circleSvg.style.strokeDashoffset = 0;
   setTimeout(() => {
     alert("Time's up!");
@@ -171,23 +243,23 @@ settingsButton.addEventListener("click", () => {
     return;
   }
 
-  if (!running) {   
-    motionSection.style.transform = 'translate(-50%, calc(100vh - 50%))';
-    motionSection.style.transition = 'transform 0.6s ease-out';
+  if (!running) {
+    motionSection.style.transform = "translate(-50%, calc(100vh - 50%))";
+    motionSection.style.transition = "transform 0.6s ease-out";
     modalBlock.style.display = "block";
-    
+
     setTimeout(() => {
-      motionSection.style.transform = 'translate(-50%, -50%)';
+      motionSection.style.transform = "translate(-50%, -50%)";
     }, 0);
 
-    closeButton.addEventListener("click", () => {     
-      motionSection.style.transform = 'translate(-50%, calc(100vh - 50%))';
-     
+    closeButton.addEventListener("click", () => {
+      motionSection.style.transform = "translate(-50%, calc(100vh - 50%))";
+
       setTimeout(() => {
         modalBlock.style.display = "none";
       }, 600);
     });
-  }  
+  }
 });
 
 //NOTE - Функція оновлення таймера при виборі хвилин
@@ -213,11 +285,11 @@ applyButton.addEventListener("click", () => {
   buttonData["short break"].minutes = shortInput.value.toString();
   buttonData["long break"].minutes = longInput.value.toString();
 
-  updatePomodoroTimer();  
+  updatePomodoroTimer();
   circleSvg.style.strokeDashoffset = 0;
 
-  motionSection.style.transform = 'translate(-50%, calc(100vh - 50%))';
-  
+  motionSection.style.transform = "translate(-50%, calc(100vh - 50%))";
+
   setTimeout(() => {
     modalBlock.style.display = "none";
   }, 600);
@@ -229,8 +301,7 @@ function increaseInputValue(input, increment) {
     let currentValue = parseInt(input.value);
     if (currentValue < 1) {
       input.value = "01";
-    }
-    else if (currentValue < 60) {
+    } else if (currentValue < 60) {
       currentValue = (currentValue + 1).toString().padStart(2, "0");
       input.value = currentValue;
     }
@@ -248,8 +319,7 @@ function decreaseInputValue(input, decrement) {
     let currentValue = parseInt(input.value);
     if (currentValue < 1) {
       input.value = "01";
-    }
-    else if (currentValue > 1) {
+    } else if (currentValue > 1) {
       currentValue = (currentValue - 1).toString().padStart(2, "0");
       input.value = currentValue;
     }
