@@ -249,7 +249,7 @@ settingsButton.addEventListener("click", () => {
     modalBlock.style.display = "block";
 
     setTimeout(() => {
-      motionSection.style.transform = "translate(-50%, -50%)";
+      motionSection.style.transform = "translate(-50%, -55%)";
     }, 0);
 
     closeButton.addEventListener("click", () => {
