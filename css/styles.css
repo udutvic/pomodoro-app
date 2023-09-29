@@ -133,7 +133,8 @@ svg path {
   position: relative;
 }
 .timer__main-colon {
-  padding-left: 1px;
+  width: 60px;
+  text-align: center;
   margin-top: -10px;
   font-weight: 700;
   color: rgb(215, 224, 255);

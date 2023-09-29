@@ -165,7 +165,8 @@ svg path {
     // .timer__main-colon
 
     &-colon {
-      padding-left: 1px;
+      width: 60px;
+      text-align: center;
       margin-top: -10px;
       font-weight: 700;
       color: $color-light-blue-2;
