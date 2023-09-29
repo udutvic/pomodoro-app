@@ -407,8 +407,8 @@ svg path {
 @media (max-width: 600px) {
   .timer__main-minutes > input[type=number],
   .timer__main-seconds > input[type=number] {
-    font-size: 80px;
-    width: 100px;
+    font-size: 75px;
+    width: 90px;
   }
   .timer__logo {
     width: 117px;
@@ -431,8 +431,14 @@ svg path {
     height: 268px;
   }
   .timer__main-clock {
-    font-size: 80px;
+    font-size: 75px;
     margin: 20px auto;
+  }
+  .timer__main-colon {
+    width: 40px;
+    text-align: center;
+    padding: 0;
+    margin-top: -5px;
   }
   .timer__main-circle {
     --dash-array: 0px;
